@@ -24,13 +24,21 @@
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Nome do Projeto" />
+    
+    <TextView
+        android:id="@+id/txSelciona"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecionar um Evento:"
+        android:textSize="20dp" />
 
     <ListView
         android:id="@+id/listEventos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
-
+    
+  
     <Button
         android:id="@+id/bt_next"
         style="?android:attr/buttonStyleSmall"

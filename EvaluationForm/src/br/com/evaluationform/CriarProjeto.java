@@ -3,16 +3,21 @@ package br.com.evaluationform;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import br.com.evaluationform.dao.Evento;
 import br.com.evaluationform.dao.EventoDAO;
+import br.com.evaluationform.dao.Projeto;
 import br.com.evaluationform.dao.ProjetoDAO;
 
 public class CriarProjeto extends Activity {
@@ -22,6 +27,7 @@ public class CriarProjeto extends Activity {
 	private Button btNext;
 	private ProjetoDAO projetoDAO;
 	private EventoDAO eventoDAO;
+	private Evento eventoSelecionado;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,30 +42,23 @@ public class CriarProjeto extends Activity {
 		}
 
 		this.inicializaComponentes();
+		
 
 		btNext.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				String nomePj = nomeProj.getText().toString();
-				ArrayList<Evento> listaEventos = eventoDAO.buscarTodosEventos();
-				if (listaEventos != null) {
-					ArrayAdapter<Evento> adapterEventos = new ArrayAdapter<Evento>(
-							CriarProjeto.this,
-							android.R.layout.simple_list_item_1,
-							listaEventos);
-
-					listaEv.setAdapter(adapterEventos);
-				}
 				
-
-				// String listEv = listaEv.g
-				//
-				//
-				// if(dao.inserirProjeto(0, nomePj, )){
-				//
-				//
-				// }
+				
+				if(verificaPreenchimento()){
+					projetoDAO.inserirProjeto(new Projeto(0, nomePj, eventoSelecionado.getId_evento()));
+					Toast.makeText(getApplicationContext(), "Projeto Criado Com Sucesso", Toast.LENGTH_LONG)
+					.show();
+				}
+				//Intent nextCria = new Intent(getApplicationContext(), ContinuaProjeto.class);
+				//startActivity(nextCria);
+				
 
 			}
 		});
@@ -72,6 +71,38 @@ public class CriarProjeto extends Activity {
 		this.btNext = (Button) findViewById(R.id.bt_next);
 		this.projetoDAO = new ProjetoDAO();
 		this.eventoDAO = new EventoDAO();
+		
+		ArrayList<Evento> listaEventos = eventoDAO.buscarTodosEventos();
+		if (listaEventos != null) {
+			ArrayAdapter<Evento> adapterEventos = new ArrayAdapter<Evento>(
+					CriarProjeto.this,
+					android.R.layout.simple_list_item_1,
+					listaEventos);
+
+			listaEv.setAdapter(adapterEventos);
+			
+			listaEv.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					
+					int itemPosition = position;
+					eventoSelecionado = (Evento)listaEv.getItemAtPosition(position);
+					
+					
+					
+				}
+			});
+			
+					}
+	}
+	private boolean verificaPreenchimento(){
+		boolean preencheu = false;
+		if(!this.nomeProj.getText().toString().equals("") && eventoSelecionado!=null) {
+			preencheu = true;
+		}
+		return preencheu;
 	}
 
 }
