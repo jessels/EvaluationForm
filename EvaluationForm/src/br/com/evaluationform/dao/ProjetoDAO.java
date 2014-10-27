@@ -27,7 +27,7 @@ public class ProjetoDAO {
 		SoapObject proj = new SoapObject(NAMESPACE, "projeto");
 		
 		proj.addProperty("id_projeto", projeto.getId_projeto());
-		proj.addProperty("nome_projeto", projeto.getNome());
+		proj.addProperty("nome", projeto.getNome());
 		proj.addProperty("id_evento", projeto.getId_evento());
 		
 		
@@ -61,7 +61,7 @@ public class ProjetoDAO {
 		SoapObject proj = new SoapObject(NAMESPACE, "projeto");
 		
 		proj.addProperty("id_projeto", projeto.getId_projeto());
-		proj.addProperty("nome_projeto", projeto.getNome());
+		proj.addProperty("nome", projeto.getNome());
 		proj.addProperty("id_evento", projeto.getId_evento());
 		
 		
@@ -142,7 +142,7 @@ SoapObject buscarTodosProjetos = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				
 				Projeto proj = new Projeto();
 				proj.setId_projeto(	Integer.parseInt(soapObject.getProperty("id_projeto").toString()));
-				proj.setNome(soapObject.getProperty("nome_projeto").toString());
+				proj.setNome(soapObject.getProperty("nome").toString());
 				proj.setId_evento(Integer.parseInt(soapObject.getProperty("id_evento").toString()));
 				
 				
@@ -182,7 +182,7 @@ SoapObject buscarTodosProjetos = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				proj = new Projeto();
 				
 				proj.setId_projeto(	Integer.parseInt(resposta.getProperty("id_projeto").toString()));
-				proj.setNome(resposta.getProperty("nome_projeto").toString());
+				proj.setNome(resposta.getProperty("nome").toString());
 				proj.setId_evento(Integer.parseInt(resposta.getProperty("login").toString()));
 				
 				

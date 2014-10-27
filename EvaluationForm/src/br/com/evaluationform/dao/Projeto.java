@@ -52,7 +52,7 @@ public class Projeto implements Serializable{
 
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 

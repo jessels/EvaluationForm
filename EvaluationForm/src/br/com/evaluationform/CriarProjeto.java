@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -31,7 +32,6 @@ public class CriarProjeto extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.criar_projeto);
 
@@ -53,12 +53,10 @@ public class CriarProjeto extends Activity {
 				
 				if(verificaPreenchimento()){
 					projetoDAO.inserirProjeto(new Projeto(0, nomePj, eventoSelecionado.getId_evento()));
-					Toast.makeText(getApplicationContext(), "Projeto Criado Com Sucesso", Toast.LENGTH_LONG)
-					.show();
+					
 				}
-				//Intent nextCria = new Intent(getApplicationContext(), ContinuaProjeto.class);
-				//startActivity(nextCria);
 				
+							
 
 			}
 		});
