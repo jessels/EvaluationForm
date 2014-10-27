@@ -38,8 +38,9 @@ public class CriarProjeto extends Activity{
 			public void onClick(View v) {
 				String nomePj = nomeProj.getText().toString();
 				
+				
 				ProjetoDAO dao = new ProjetoDAO();
-				if(dao.inserirProjeto(0, nomePj, )){
+				if(dao.inserirProjeto(0, nomePj,)){
 					
 					
 				}
