@@ -11,11 +11,8 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class ProjetoDAO {
 	
-	private static final String classeWs = "ProjetoDAO" + "?wsdl";
-	static ConectaWs conexao = new ConectaWs();
-	
-	private static final String URL = conexao.getURL() + classeWs;
-	private static final String NAMESPACE = conexao.getNamespace();
+	private static final String URL = "http://192.168.3.111:8080/EvaluationWS4/services/ProjetoDAO?wsdl";
+	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirProjeto";
 	private static final String	EXCLUIR = "excluirProjeto";

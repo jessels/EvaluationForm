@@ -65,5 +65,9 @@ public class Evento implements Serializable {
 		this.instituicao = instituicao;
 	}
 	
+	@Override
+	public String toString() {
+		return this.nome;
+	}
 
 }
