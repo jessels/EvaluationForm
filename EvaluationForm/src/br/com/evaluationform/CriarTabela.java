@@ -21,6 +21,8 @@ public class CriarTabela extends Activity{
 	private EditText edPeso;
 	private ListView listCrit;
 	private CriterioDAO criterioDAO;
+	private ArrayList<Criterio> listaCriterios;
+	private ArrayAdapter<Criterio> criterioAdapter;
 	
 	
 	@Override
@@ -41,17 +43,14 @@ public class CriarTabela extends Activity{
 			public void onClick(View v) {
 				String descricao = edDesc.getText().toString();
 				int peso = Integer.parseInt(edPeso.getText().toString());
-				
-				criterioDAO.inserirCriterio(new Criterio(0, peso, descricao ));
+				Criterio c = new Criterio(0, peso, descricao );
+				criterioDAO.inserirCriterio(c);
+				atualizaAdapter();
 				
 				
 			}
 		});
 	}
-	
-	
-	
-	
 	
 	private void inicializaComponentes(){
 		this.btMais = (Button) findViewById(R.id.bt_add);
@@ -59,16 +58,22 @@ public class CriarTabela extends Activity{
 		this.edPeso = (EditText) findViewById(R.id.ed_peso);
 		this.listCrit = (ListView) findViewById(R.id.list_crit);
 		this.criterioDAO = new CriterioDAO();
+		atualizaAdapter();
 		
-		ArrayList<Criterio> listaCriterios = criterioDAO.buscarTodosCriterios();
-			if(listaCriterios != null){
-				ArrayAdapter<Criterio> criterioAdapter = new ArrayAdapter<Criterio>(CriarTabela.this, 
-						android.R.layout.simple_list_item_1);
-				
+	}
+	
+	private void atualizaAdapter() {
+		listaCriterios = criterioDAO.buscarTodosCriterios();
+		if(listaCriterios!=null){
+			if(criterioAdapter==null) {
+				criterioAdapter = new ArrayAdapter<Criterio>(CriarTabela.this, android.R.layout.simple_list_item_1, listaCriterios);
 				listCrit.setAdapter(criterioAdapter);
-				
+			}else {
+				criterioAdapter.clear();
+				criterioAdapter.addAll(listaCriterios);
+				criterioAdapter.notifyDataSetChanged();
 			}
-		
+		}		
 	}
 	
 	

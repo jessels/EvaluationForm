@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class CriterioDAO {
 	
-	private static final String URL = "http://172.20.10.5:8080/EvaluationWS4/services/CriterioDAO?wsdl";
+	private static final String URL = "http://192.168.241.129:8080/EvaluationWS4/services/CriterioDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirCriterio";
@@ -141,7 +141,7 @@ SoapObject buscarTodosCriterios = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 			for (SoapObject soapObject : resposta) {
 				
 				Criterio crit = new Criterio();
-				crit.setId_criterio(	Integer.parseInt(soapObject.getProperty("id").toString()));
+				crit.setId_criterio(	Integer.parseInt(soapObject.getProperty("id_criterio").toString()));
 				crit.setPeso(Integer.parseInt(soapObject.getProperty("peso").toString()));
 				crit.setDescricao(soapObject.getProperty("descricao").toString());
 				
