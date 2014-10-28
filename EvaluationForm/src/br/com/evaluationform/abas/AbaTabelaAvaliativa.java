@@ -1,5 +1,6 @@
 package br.com.evaluationform.abas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import br.com.evaluationform.CriarTabela;
 import br.com.evaluationform.R;
 
 public class AbaTabelaAvaliativa extends Fragment{
@@ -32,7 +34,9 @@ public class AbaTabelaAvaliativa extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				
+				Intent irCriarTabela = new Intent(getActivity().getApplicationContext(), CriarTabela.class);
+				startActivity(irCriarTabela);
+								
 				
 				
 				

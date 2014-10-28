@@ -10,7 +10,8 @@ import android.widget.ListView;
 public class SelecionarAvaliador extends Activity{
 	
 	private ListView listSelectAv;
-	private Button btFinaliza;
+	private ListView listSelectTb;
+	private Button btSalva;
 	private UsuarioDAO usuarioDAO;
 	//private ArrayList
 	
@@ -27,12 +28,15 @@ public class SelecionarAvaliador extends Activity{
 		this.inicializaComponentes();
 		
 		
+		
 	
 		
 	}
 	private void inicializaComponentes(){
 		this.listSelectAv = (ListView) findViewById(R.id.lv_avaliadores);
-		this.btFinaliza = (Button) findViewById(R.id.bt_finaliza);
+		this.listSelectTb = (ListView) findViewById(R.id.lv_tabelas);
+		this.btSalva = (Button) findViewById(R.id.bt_salva);
+		this.usuarioDAO = new UsuarioDAO();
 		
 		
 	}

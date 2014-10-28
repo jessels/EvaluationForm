@@ -30,6 +30,7 @@
         <activity android:name="CriarEvento"></activity>
         <activity android:name="CriarProjeto"></activity>
         <activity android:name="VisualizarEventos"></activity>
+        <activity android:name="CriarTabela"></activity>
     </application>
 
 </manifest>

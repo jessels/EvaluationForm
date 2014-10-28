@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import br.com.evaluationform.abas.AbaEventos;
+import br.com.evaluationform.abas.AbaMinhasAvaliacoes;
 import br.com.evaluationform.abas.AbaProjetos;
 import br.com.evaluationform.abas.AbaTabelaAvaliativa;
 
@@ -42,6 +43,11 @@ public class TelaPrincipal extends FragmentActivity  {
 		tab3.setText("Tabelas");
 		tab3.setTabListener(new Navegar(new AbaTabelaAvaliativa()));
 		actionBar.addTab(tab3, false);
+		
+		Tab tab4 = actionBar.newTab();
+		tab4.setText("Minhas Avaliações");
+		tab4.setTabListener(new Navegar(new AbaMinhasAvaliacoes()));
+		actionBar.addTab(tab4, false);
 		
 		if(savedInstanceState != null){
 			int indiceTab = savedInstanceState.getInt("indiceTab");
