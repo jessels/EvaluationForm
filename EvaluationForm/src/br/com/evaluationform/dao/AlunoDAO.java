@@ -4,6 +4,7 @@
 import java.util.Vector;
 		
 
+
 		import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -12,11 +13,8 @@ import org.ksoap2.transport.HttpTransportSE;
 		
 		public class AlunoDAO {
 			
-			private static final String classeWs = "AlunoDAO" + "?wsdl";
-			static ConectaWs conexao = new ConectaWs();
-			
-			private static final String URL = conexao.getURL() + classeWs;
-			private static final String NAMESPACE = conexao.getNamespace();
+			private static final String URL = "http://172.20.10.5:8080/EvaluationWS4/services/AlunoDAO?wsdl";
+			private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 			
 			private static final String INSERIR = "inserirAluno";
 			private static final String	EXCLUIR = "excluirAluno";

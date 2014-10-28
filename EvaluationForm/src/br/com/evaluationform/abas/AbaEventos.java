@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import br.com.evaluationform.CriarEvento;
 import br.com.evaluationform.R;
+import br.com.evaluationform.VisualizarEventos;
 
 public class AbaEventos extends Fragment{
 	
@@ -48,6 +49,8 @@ public class AbaEventos extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
+				Intent irTelaCriarEv = new Intent(getActivity().getApplicationContext(), VisualizarEventos.class);
+				startActivity(irTelaCriarEv);
 				
 				
 				

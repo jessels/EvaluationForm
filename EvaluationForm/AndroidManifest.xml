@@ -29,6 +29,7 @@
         <activity android:name="TelaPrincipal"></activity>
         <activity android:name="CriarEvento"></activity>
         <activity android:name="CriarProjeto"></activity>
+        <activity android:name="VisualizarEventos"></activity>
     </application>
 
 </manifest>

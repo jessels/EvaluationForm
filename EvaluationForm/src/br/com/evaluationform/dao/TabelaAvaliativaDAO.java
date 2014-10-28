@@ -11,11 +11,8 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class TabelaAvaliativaDAO {
 	
-	private static final String classeWs = "TabelaAvaliativaDAO" + "?wsdl";
-	static ConectaWs conexao = new ConectaWs();
-	
-	private static final String URL = conexao.getURL() + classeWs;
-	private static final String NAMESPACE = conexao.getNamespace();
+	private static final String URL = "http://172.20.10.5:8080/EvaluationWS4/services/TabelaAvaliativaDAO?wsdl";
+	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirTabelaAvaliativa";
 	private static final String	EXCLUIR = "excluirTabelaAvaliativa";

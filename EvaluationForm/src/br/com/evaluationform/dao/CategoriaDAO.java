@@ -11,11 +11,8 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class CategoriaDAO {
 	
-	private static final String classeWs = "CategoriaDAO" + "?wsdl";
-	static ConectaWs conexao = new ConectaWs();
-	
-	private static final String URL = conexao.getURL() + classeWs;
-	private static final String NAMESPACE = conexao.getNamespace();
+	private static final String URL = "http://172.20.10.5:8080/EvaluationWS4/services/CategoriaDAO?wsdl";
+	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirCategoria";
 	private static final String	EXCLUIR = "excluirCategoria";

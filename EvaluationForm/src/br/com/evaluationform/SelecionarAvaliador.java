@@ -1,5 +1,6 @@
 package br.com.evaluationform;
 
+import br.com.evaluationform.dao.UsuarioDAO;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -10,6 +11,8 @@ public class SelecionarAvaliador extends Activity{
 	
 	private ListView listSelectAv;
 	private Button btFinaliza;
+	private UsuarioDAO usuarioDAO;
+	//private ArrayList
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class SelecionarAvaliador extends Activity{
 			StrictMode.setThreadPolicy(policy);
 		}
 		this.inicializaComponentes();
+		
+		
 	
 		
 	}
