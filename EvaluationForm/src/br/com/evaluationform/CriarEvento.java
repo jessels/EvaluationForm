@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import br.com.evaluationform.abas.AbaEventos;
 import br.com.evaluationform.dao.Evento;
 import br.com.evaluationform.dao.EventoDAO;
 
@@ -55,7 +56,7 @@ public class CriarEvento extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				Intent irProximaTela = new Intent(getApplicationContext(), VisualizarEventos.class);
+				Intent irProximaTela = new Intent(getApplicationContext(), AbaEventos.class);
 				startActivity(irProximaTela);
 				finish();
 				

@@ -23,9 +23,9 @@ public class AbaMinhasAvaliacoes extends Fragment{
 			}
 			
 			final Button criaAvaliacao = (Button) view.findViewById(R.id.bt_Atividade1);
-			final Button visualAvaliacao = (Button) view.findViewById(R.id.bt_Atividade2);
+//			final Button visualAvaliacao = (Button) view.findViewById(R.id.bt_Atividade2);
 			criaAvaliacao.setText("Criar Avaliação");
-			visualAvaliacao.setText("Visualizar Avaliação");			
+//			visualAvaliacao.setText("Visualizar Avaliação");			
 			
 			
 			
