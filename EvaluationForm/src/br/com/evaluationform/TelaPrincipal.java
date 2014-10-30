@@ -1,6 +1,7 @@
 package br.com.evaluationform;
 
 import br.com.evaluationform.abas.MenuEvento;
+import br.com.evaluationform.abas.MenuProjeto;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,7 +44,7 @@ public class TelaPrincipal extends Activity  {
 			
 			@Override
 			public void onClick(View v) {
-				Intent irTelaProjeto = new Intent(getApplicationContext(), CriarProjeto.class);
+				Intent irTelaProjeto = new Intent(getApplicationContext(), MenuProjeto.class);
 				startActivity(irTelaProjeto);
 			}
 		});

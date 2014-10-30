@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Projeto implements Serializable{
 	
 
+	
+
 	private static final long serialVersionUID = 3881452565391239160L;
 	private int id_projeto;
 	private String nome;
@@ -59,7 +61,11 @@ public class Projeto implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+	@Override
+	public String toString() {
+		return nome;
+	}
+
 	
 
 }
