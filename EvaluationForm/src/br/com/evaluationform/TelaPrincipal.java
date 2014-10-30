@@ -1,100 +1,83 @@
 package br.com.evaluationform;
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import br.com.evaluationform.abas.AbaEventos;
-import br.com.evaluationform.abas.AbaMinhasAvaliacoes;
-import br.com.evaluationform.abas.AbaProjetos;
-import br.com.evaluationform.abas.AbaTabelaAvaliativa;
+import android.os.StrictMode;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
-public class TelaPrincipal extends FragmentActivity  {
+public class TelaPrincipal extends Activity  {
+	
+	private Button menuEvento;
+	private Button menuProjeto;
+	private Button menuTabela;
+	private Button menuAvaliacao;
+	private Button config;
 	
 	
 	
-	private ActionBar actionBar;
-
-	
-	
-	//private FragmentTabHost mTabHost;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tela_principal);
-		actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
 		
-		Tab tab1 = actionBar.newTab();
-		tab1.setText("Eventos");
-		tab1.setTabListener(new Navegar(new AbaEventos()));
-		actionBar.addTab(tab1, false);
-		
-		Tab tab2 = actionBar.newTab();
-		tab2.setText("Projetos");
-		tab2.setTabListener(new Navegar(new AbaProjetos()));
-		actionBar.addTab(tab2, false);
-		
-		Tab tab3 = actionBar.newTab();
-		tab3.setText("Tabelas");
-		tab3.setTabListener(new Navegar(new AbaTabelaAvaliativa()));
-		actionBar.addTab(tab3, false);
-		
-		Tab tab4 = actionBar.newTab();
-		tab4.setText("Minhas Avaliações");
-		tab4.setTabListener(new Navegar(new AbaMinhasAvaliacoes()));
-		actionBar.addTab(tab4, false);
-		
-		if(savedInstanceState != null){
-			int indiceTab = savedInstanceState.getInt("indiceTab");
-			getActionBar().setSelectedNavigationItem(indiceTab);
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+					.permitAll().build();
+			StrictMode.setThreadPolicy(policy);
 		}
-		else{
-			getActionBar().setSelectedNavigationItem(0);
-		}
-        
-	}
-	private class Navegar implements ActionBar.TabListener{
-		private Fragment frag;
+		this.inicializaComponentes();
 		
-		public Navegar(Fragment frag){
-			this.frag = frag;
+		menuEvento.setOnClickListener(new OnClickListener() {
 			
-		}
+			@Override
+			public void onClick(View v) {
+				Intent irTelaEvento = new Intent(getApplicationContext(), CriarEvento.class);
+				startActivity(irTelaEvento);
+			}
+		});
+		menuProjeto.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent irTelaProjeto = new Intent(getApplicationContext(), CriarProjeto.class);
+				startActivity(irTelaProjeto);
+			}
+		});
+		menuTabela.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent irTelaTabela = new Intent(getApplicationContext(), CriarTabela.class);
+				startActivity(irTelaTabela);
+			}
+		});
+		menuAvaliacao.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//Intent irTelaAvaliacao = new Intent(getApplicationContext(), )
+			}
+		});
+		config.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+//				Intent irTelaConfig = new Intent(getApplicationContext(),);
+			}
+		});
 		
-
-	@Override
-	public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
-		FragmentTransaction fts = getSupportFragmentManager().beginTransaction();
-		fts.replace(R.id.abasSelec, frag);
-		fts.commit();
-
-	}
-
-	@Override
-	public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
-		FragmentTransaction fts = getSupportFragmentManager().beginTransaction();
-		fts.commit();
-
-	}
-
-	@Override
-	public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
-		FragmentTransaction fts = getSupportFragmentManager().beginTransaction();
-		fts.replace(R.id.abasSelec, frag);
-		fts.commit();
-
 	}
 	
+	private void inicializaComponentes(){
+		this.menuEvento = (Button) findViewById(R.id.menu_evento);
+		this.menuProjeto = (Button) findViewById(R.id.menu_projeto);
+		this.menuTabela = (Button) findViewById(R.id.menu_tabela);
+		this.menuAvaliacao = (Button) findViewById(R.id.menu_avaliacao);
+		this.config = (Button) findViewById(R.id.menu_config);
+		
 	}
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putInt("indiceTab", getActionBar().getSelectedNavigationIndex());
-	}
-
+	
 }

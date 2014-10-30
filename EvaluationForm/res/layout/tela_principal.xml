@@ -1,22 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:orientation="vertical" >
-    
-    
-        <LinearLayout
-            android:id="@+id/abasSelec"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"          
-            >
-           
- 
-            
-      	</LinearLayout>
-   
 
-  </LinearLayout>
+    <Button
+        android:id="@+id/menu_evento"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="110dp"
+        android:layout_weight="0.45"
+        android:text="Eventos" />
+
+    <TextView
+        android:id="@+id/tx_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:textSize="30dp"
+        android:text="Menu" />
+
+    <Button
+        android:id="@+id/menu_projeto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/menu_evento"
+        android:layout_marginTop="20dp"
+        android:text="Projetos" />
+
+    <Button
+        android:id="@+id/menu_tabela"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/menu_projeto"
+        android:layout_marginTop="20dp"
+        android:text="Tabela Avaliativa" />
+
+    <Button
+        android:id="@+id/menu_config"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="32dp"
+        android:layout_below="@+id/menu_avaliacao"
+        android:layout_marginTop="20dp"
+        android:text="Configurações" />
+
+    <Button
+        android:id="@+id/menu_avaliacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/menu_tabela"
+        android:layout_marginTop="20dp"
+        android:text="Minhas Avaliações" />
+
+</RelativeLayout>
