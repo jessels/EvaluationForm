@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp"
         android:textSize="20dp"
-        android:text="Criar Tabela" />
+        android:text="Tabela" />
 
     <TextView
         android:id="@+id/txNomeTabela"
@@ -37,11 +37,29 @@
         android:ems="10" />
 
     <Button
-        android:id="@+id/btSalvar"
+        android:id="@+id/bt_menu_tabela_criar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edNomeTabela"
+        android:layout_marginTop="20dp"
+        android:text="Criar Nova Tabela" />
+
+    <ListView
+        android:id="@+id/lista_menu_projeto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_menu_tabela_criar"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Salvar" />
+        android:layout_marginTop="20dp" >
+    </ListView>
+
+    <Button
+        android:id="@+id/bt_menu_projeto_voltar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Voltar" />
 
 </RelativeLayout>
