@@ -31,6 +31,7 @@
         <activity android:name="CriarProjeto"></activity>
         <activity android:name="VisualizarEventos"></activity>
         <activity android:name="CriarTabela"></activity>
+        <activity android:name=".abas.MenuEvento"></activity>
     </application>
 
 </manifest>
