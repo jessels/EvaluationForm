@@ -28,8 +28,7 @@ public class TabelaAvaliativaDAO {
 		
 		tav.addProperty("id_tabela_av", tabela.getId_tabela_av());
 		tav.addProperty("nome_tabela", tabela.getNome());
-		tav.addProperty("nota_final", tabela.getNota_final());
-		tav.addProperty("id_criterio", tabela.getId_criterio());
+		
 		
 		
 		inserirTabelaAvaliativa.addSoapObject(tav);
@@ -63,8 +62,7 @@ public class TabelaAvaliativaDAO {
 		
 		tav.addProperty("id_tabela_av", tabela.getId_tabela_av());
 		tav.addProperty("nome_tabela", tabela.getNome());
-		tav.addProperty("nota_final", tabela.getNota_final());
-		tav.addProperty("id_criterio", tabela.getId_criterio());
+		
 				
 		atualizarTabelaAvaliativa.addSoapObject(tav);
 		
@@ -144,8 +142,7 @@ SoapObject buscarTodasTabelas = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				TabelaAvaliativa tav2 = new TabelaAvaliativa();
 				tav2.setId_tabela_av(	Integer.parseInt(soapObject.getProperty("id_tabel_av").toString()));
 				tav2.setNome(soapObject.getProperty("nome_tabela").toString());
-				tav2.setNota_final(	Integer.parseInt(soapObject.getProperty("nota_final").toString()));
-				tav2.setId_criterio(	Integer.parseInt(soapObject.getProperty("id_criterio").toString()));
+				
 				
 				
 				lista.add(tav2);
@@ -184,9 +181,7 @@ SoapObject buscarTodasTabelas = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				tav = new TabelaAvaliativa();
 				
 				tav.setId_tabela_av(	Integer.parseInt(resposta.getProperty("id_tabela_av").toString()));
-				tav.setNota_final(	Integer.parseInt(resposta.getProperty("nota_final").toString()));
 				tav.setNome(resposta.getProperty("nome_tabela").toString());
-				tav.setId_criterio(	Integer.parseInt(resposta.getProperty("id_criterio").toString()));
 				
 				
 				
