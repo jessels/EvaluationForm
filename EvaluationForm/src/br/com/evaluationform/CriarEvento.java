@@ -16,6 +16,12 @@ import br.com.evaluationform.dao.EventoDAO;
 
 public class CriarEvento extends Activity{
 	
+	private EditText nomeEvento;
+	private EditText instituicao;
+	private EditText endereco;
+	private Button btCria;
+	private Button btGo;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,12 +32,7 @@ public class CriarEvento extends Activity{
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		
-		final EditText nomeEvento = (EditText) findViewById(R.id.ed_nome_pj);
-		final EditText instituicao = (EditText) findViewById(R.id.ed_instit);
-		final EditText endereco = (EditText) findViewById(R.id.ed_end);
-		final Button btCria = (Button) findViewById(R.id.bt_cria);
-		final Button btGo = (Button) findViewById(R.id.bt_go);
+		this.inicializaComponentes();
 		
 		btCria.setOnClickListener(new OnClickListener() {
 			
@@ -46,9 +47,7 @@ public class CriarEvento extends Activity{
 				if(dao.inserirEvento(new Evento(0, nomeEv, enderecoTx, instituicaoTx))){
 					Toast.makeText(getApplicationContext(), "Evento Criado Com Sucesso", Toast.LENGTH_LONG)
 								.show();
-					
 				}
-				
 			}
 		});
 		
@@ -59,13 +58,14 @@ public class CriarEvento extends Activity{
 				Intent irProximaTela = new Intent(getApplicationContext(), MenuEvento.class);
 				startActivity(irProximaTela);
 				finish();
-				
 			}
 		});
-		
-		
-		
 	}
-	
-
+	private void inicializaComponentes(){
+		this.nomeEvento = (EditText) findViewById(R.id.ed_nome_pj);
+		this.instituicao = (EditText) findViewById(R.id.ed_instit);
+		this.endereco = (EditText) findViewById(R.id.ed_end);
+		this.btCria = (Button) findViewById(R.id.bt_cria);
+		this.btGo = (Button) findViewById(R.id.bt_go);
+	}
 }

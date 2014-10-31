@@ -18,6 +18,14 @@ import br.com.evaluationform.dao.Usuario;
 import br.com.evaluationform.dao.UsuarioDAO;
 
 public class TelaCadastro extends Activity {
+	
+	private EditText nome;
+	private EditText login;
+	private EditText senha;
+	private EditText confSenha;
+	private Button usar;
+	private Button registro;
+	private Sessao sessao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +37,7 @@ public class TelaCadastro extends Activity {
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-
-		final EditText nome = (EditText) findViewById(R.id.ed_nome);
-		final EditText login = (EditText) findViewById(R.id.ed_login);
-		final EditText senha = (EditText) findViewById(R.id.ed_senha);
-		final EditText confSenha = (EditText) findViewById(R.id.ed_con_senha);
-		final Button usar = (Button) findViewById(R.id.btUsar);
-		final Button registro = (Button) findViewById(R.id.bt_registro);
-		final Sessao sessao = new Sessao(getApplicationContext());
+		this.inicializaComponentes();
 
 		registro.setOnClickListener(new Button.OnClickListener() {
 
@@ -55,10 +56,8 @@ public class TelaCadastro extends Activity {
 						BigInteger hash = new BigInteger(1, md.digest());
 						codSenha = hash.toString(16);
 					} catch (NoSuchAlgorithmException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (UnsupportedEncodingException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -87,5 +86,14 @@ public class TelaCadastro extends Activity {
 			}
 		});
 
+	}
+	private void inicializaComponentes(){
+		this.nome = (EditText) findViewById(R.id.ed_nome);
+		this.login = (EditText) findViewById(R.id.ed_login);
+		this.senha = (EditText) findViewById(R.id.ed_senha);
+		this.confSenha = (EditText) findViewById(R.id.ed_con_senha);
+		this.usar = (Button) findViewById(R.id.btUsar);
+		this.registro = (Button) findViewById(R.id.bt_registro);
+		this.sessao = new Sessao(getApplicationContext());
 	}
 }

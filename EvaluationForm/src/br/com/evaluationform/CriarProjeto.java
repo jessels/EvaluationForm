@@ -40,7 +40,6 @@ public class CriarProjeto extends Activity {
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-
 		this.inicializaComponentes();
 		
 
@@ -55,9 +54,6 @@ public class CriarProjeto extends Activity {
 					projetoDAO.inserirProjeto(new Projeto(0, nomePj, eventoSelecionado.getId_evento()));
 					
 				}
-				
-							
-
 			}
 		});
 
@@ -87,8 +83,6 @@ public class CriarProjeto extends Activity {
 					
 					int itemPosition = position;
 					eventoSelecionado = (Evento)listaEv.getItemAtPosition(position);
-					
-					
 					
 				}
 			});

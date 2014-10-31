@@ -17,6 +17,12 @@ import br.com.evaluationform.dao.Usuario;
 import br.com.evaluationform.dao.UsuarioDAO;
 
 public class TelaLogin extends Activity {
+	
+	private EditText edLogin;
+	private EditText edSenha;
+	private Button btEntrar;
+	private Button btRegistro;
+	private Sessao sessao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +34,9 @@ public class TelaLogin extends Activity {
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
+		this.inicializaComponentes();
 
-		final EditText edLogin = (EditText) findViewById(R.id.ed_login);
-		final EditText edSenha = (EditText) findViewById(R.id.ed_senha);
-		final Button btEntrar = (Button) findViewById(R.id.bt_entrar);
-		final Button btRegistro = (Button) findViewById(R.id.bt_registro);
-		final Sessao sessao = new Sessao(getApplicationContext());
+		
 
 		btEntrar.setOnClickListener(new OnClickListener() {
 
@@ -91,6 +94,13 @@ public class TelaLogin extends Activity {
 
 		});
 
+	}
+	private void inicializaComponentes(){
+		this.edLogin = (EditText) findViewById(R.id.ed_login);
+		this.edSenha = (EditText) findViewById(R.id.ed_senha);
+		this.btEntrar = (Button) findViewById(R.id.bt_entrar);
+		this.btRegistro = (Button) findViewById(R.id.bt_registro);
+		this.sessao = new Sessao(getApplicationContext());
 	}
 
 }
