@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -15,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 import br.com.evaluationform.dao.Evento;
 import br.com.evaluationform.dao.EventoDAO;
 import br.com.evaluationform.dao.Projeto;
@@ -26,6 +24,7 @@ public class CriarProjeto extends Activity {
 	private EditText nomeProj;
 	private ListView listaEv;
 	private Button btNext;
+	private Button btVolta;
 	private ProjetoDAO projetoDAO;
 	private EventoDAO eventoDAO;
 	private Evento eventoSelecionado;
@@ -56,13 +55,22 @@ public class CriarProjeto extends Activity {
 				}
 			}
 		});
+		btVolta.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent irTelaVolta = new Intent(getApplicationContext(), TelaPrincipal.class);
+				startActivity(irTelaVolta);
+			}
+		});
 
 	}
 
 	private void inicializaComponentes() {
 		this.nomeProj = (EditText) findViewById(R.id.nome_projeto);
 		this.listaEv = (ListView) findViewById(R.id.listEventos);
-		this.btNext = (Button) findViewById(R.id.bt_next);
+		this.btNext = (Button) findViewById(R.id.bt_projeto_criar);
+		this.btVolta = (Button) findViewById(R.id.bt_projeto_voltar);
 		this.projetoDAO = new ProjetoDAO();
 		this.eventoDAO = new EventoDAO();
 		

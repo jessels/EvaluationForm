@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class CriterioDAO {
 	
-	private static final String URL = "http://192.168.240.222:8080/EvaluationWS4/services/CriterioDAO?wsdl";
+	private static final String URL = "http://192.168.241.23:8080/EvaluationWS4/services/CriterioDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirCriterio";
@@ -29,6 +29,7 @@ public class CriterioDAO {
 		crit.addProperty("id", criterio.getId_criterio());
 		crit.addProperty("peso", criterio.getPeso());
 		crit.addProperty("descricao", criterio.getDescricao());
+		crit.addProperty("id_tabela_av", criterio.getId_tabela_av());
 		
 		inserirCriterio.addSoapObject(crit);
 		
@@ -62,6 +63,7 @@ public class CriterioDAO {
 		crit.addProperty("id", criterio.getId_criterio());
 		crit.addProperty("peso", criterio.getPeso());
 		crit.addProperty("descricao", criterio.getDescricao());
+		crit.addProperty("id_tabela_av", criterio.getId_tabela_av());
 		
 		
 		
@@ -141,10 +143,10 @@ SoapObject buscarTodosCriterios = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 			for (SoapObject soapObject : resposta) {
 				
 				Criterio crit = new Criterio();
-				crit.setId_criterio(	Integer.parseInt(soapObject.getProperty("id_criterio").toString()));
+				crit.setId_criterio(Integer.parseInt(soapObject.getProperty("id_criterio").toString()));
 				crit.setPeso(Integer.parseInt(soapObject.getProperty("peso").toString()));
 				crit.setDescricao(soapObject.getProperty("descricao").toString());
-				
+				crit.setId_tabela_av(Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
 				lista.add(crit);
 				
 			}
@@ -183,6 +185,7 @@ SoapObject buscarTodosCriterios = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				crit.setId_criterio(	Integer.parseInt(resposta.getProperty("id").toString()));
 				crit.setPeso(Integer.parseInt(resposta.getProperty("peso").toString()));
 				crit.setDescricao(resposta.getProperty("descricao").toString());
+				crit.setId_tabela_av(Integer.parseInt(resposta.getProperty("id_tabela_av").toString()));
 				
 				
 			

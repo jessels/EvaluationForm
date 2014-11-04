@@ -19,6 +19,7 @@ public class TabelaAvaliativa implements Serializable{
 	public TabelaAvaliativa(int id_tabela_av, String nome) {
 		super();
 		this.id_tabela_av = id_tabela_av;
+		this.nome = nome;
 		
 	}
 

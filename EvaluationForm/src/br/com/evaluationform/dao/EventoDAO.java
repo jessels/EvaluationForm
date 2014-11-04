@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class EventoDAO {
 	
-	private static final String URL = "http://192.168.241.235:8080/EvaluationWS4/services/EventoDAO?wsdl";
+	private static final String URL = "http://192.168.241.23:8080/EvaluationWS4/services/EventoDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirEvento";

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import br.com.evaluationform.dao.Criterio;
 import br.com.evaluationform.dao.CriterioDAO;
+import br.com.evaluationform.dao.TabelaAvaliativa;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -21,6 +22,7 @@ public class CriarCriterio extends Activity {
 	private EditText edPeso;
 	private ListView listCrit;
 	private CriterioDAO criterioDAO;
+	private TabelaAvaliativa id;
 	private ArrayList<Criterio> listaCriterios;
 	private ArrayAdapter<Criterio> criterioAdapter;
 
@@ -42,7 +44,7 @@ public class CriarCriterio extends Activity {
 			public void onClick(View v) {
 				String descricao = edDesc.getText().toString();
 				int peso = Integer.parseInt(edPeso.getText().toString());
-				Criterio c = new Criterio(0, peso, descricao);
+				Criterio c = new Criterio(0, peso, descricao, id.getId_tabela_av());
 				criterioDAO.inserirCriterio(c);
 				atualizaAdapter();
 

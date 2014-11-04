@@ -1,14 +1,11 @@
 package br.com.evaluationform;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -36,15 +33,6 @@ public class CriarTabela extends Activity {
 		}
 		this.inicializaComponentes();
 
-		ArrayList<TabelaAvaliativa> listaTabelaAv = tabelaDAO
-				.buscarTodasTabelas();
-		if (listaTabelaAv != null) {
-			ArrayAdapter<TabelaAvaliativa> adapterEventos = new ArrayAdapter<TabelaAvaliativa>(
-					CriarTabela.this, android.R.layout.simple_list_item_1,
-					listaTabelaAv);
-
-			listaTabela.setAdapter(adapterEventos);
-		}
 
 		cria.setOnClickListener(new OnClickListener() {
 

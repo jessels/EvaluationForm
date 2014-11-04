@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class TabelaAvaliativaDAO {
 	
-	private static final String URL = "http://192.168.240.222:8080/EvaluationWS4/services/TabelaAvaliativaDAO?wsdl";
+	private static final String URL = "http://192.168.241.23:8080/EvaluationWS4/services/TabelaAvaliativaDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirTabelaAvaliativa";
@@ -24,10 +24,10 @@ public class TabelaAvaliativaDAO {
 		
 		SoapObject inserirTabelaAvaliativa = new SoapObject(NAMESPACE, INSERIR);
 		
-		SoapObject tav = new SoapObject(NAMESPACE, "tabela_avaliativa");
+		SoapObject tav = new SoapObject(NAMESPACE, "tabelaAvaliativa");
 		
 		tav.addProperty("id_tabela_av", tabela.getId_tabela_av());
-		tav.addProperty("nome_tabela", tabela.getNome());
+		tav.addProperty("nome", tabela.getNome());
 		
 		
 		
@@ -58,10 +58,10 @@ public class TabelaAvaliativaDAO {
 		
 		SoapObject atualizarTabelaAvaliativa = new SoapObject(NAMESPACE, ATUALIZAR);
 		
-		SoapObject tav = new SoapObject(NAMESPACE, "tabela_avaliativa");
+		SoapObject tav = new SoapObject(NAMESPACE, "tabelaAvaliativa");
 		
 		tav.addProperty("id_tabela_av", tabela.getId_tabela_av());
-		tav.addProperty("nome_tabela", tabela.getNome());
+		tav.addProperty("nome", tabela.getNome());
 		
 				
 		atualizarTabelaAvaliativa.addSoapObject(tav);
@@ -91,7 +91,7 @@ public class TabelaAvaliativaDAO {
 		
 		SoapObject excluirTabelaAvaliativa = new SoapObject(NAMESPACE, EXCLUIR);
 		
-		SoapObject tav = new SoapObject(NAMESPACE, "tabela_avaliativa");
+		SoapObject tav = new SoapObject(NAMESPACE, "tabelaAvaliativa");
 		
 		tav.addProperty("id_tabela_av", id);
 		
@@ -123,7 +123,7 @@ public class TabelaAvaliativaDAO {
 		
 SoapObject buscarTodasTabelas = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 		
-		SoapObject tav = new SoapObject(NAMESPACE, "tabela_avaliativa");
+		SoapObject tav = new SoapObject(NAMESPACE, "tabelaAvaliativa");
 		
 		
 		
@@ -141,7 +141,7 @@ SoapObject buscarTodasTabelas = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				
 				TabelaAvaliativa tav2 = new TabelaAvaliativa();
 				tav2.setId_tabela_av(	Integer.parseInt(soapObject.getProperty("id_tabel_av").toString()));
-				tav2.setNome(soapObject.getProperty("nome_tabela").toString());
+				tav2.setNome(soapObject.getProperty("nome").toString());
 				
 				
 				
@@ -165,7 +165,7 @@ SoapObject buscarTodasTabelas = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 		
 		SoapObject buscarTabelaPorId = new SoapObject(NAMESPACE, BUSCAR_POR_ID);
 		
-		SoapObject tav2 = new SoapObject(NAMESPACE, "tabela_avaliativa");
+		SoapObject tav2 = new SoapObject(NAMESPACE, "tabelaAvaliativa");
 		buscarTabelaPorId.addProperty("id", id);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -181,7 +181,7 @@ SoapObject buscarTodasTabelas = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				tav = new TabelaAvaliativa();
 				
 				tav.setId_tabela_av(	Integer.parseInt(resposta.getProperty("id_tabela_av").toString()));
-				tav.setNome(resposta.getProperty("nome_tabela").toString());
+				tav.setNome(resposta.getProperty("nome").toString());
 				
 				
 				
