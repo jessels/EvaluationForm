@@ -20,7 +20,7 @@ public class TabelaAvaliativaDAO {
 	private static final String BUSCAR_TODOS = "buscarTodasTabelas";
 	private static final String BUSCAR_POR_ID = "buscarTabelaPorId";
 	
-	public boolean inserirTabelaAvaliativa(TabelaAvaliativa tabela){
+	public TabelaAvaliativa inserirTabelaAvaliativa(TabelaAvaliativa tabela){
 		
 		SoapObject inserirTabelaAvaliativa = new SoapObject(NAMESPACE, INSERIR);
 		
@@ -42,16 +42,26 @@ public class TabelaAvaliativaDAO {
 		try {
 			http.call("urn" + INSERIR, envelope);
 			
-			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+			SoapObject resposta = (SoapObject) envelope.getResponse();
 			
-			return Boolean.parseBoolean(resposta.toString());
+			return this.soToTabelaAvaliativa((SoapObject)envelope.getResponse());
 	
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		
 		}
 		
+	}
+	
+	private TabelaAvaliativa soToTabelaAvaliativa(SoapObject soTabela) {
+		TabelaAvaliativa tabela = null;
+		if(soTabela!=null) {
+			tabela = new TabelaAvaliativa();
+			tabela.setId_tabela_av(Integer.parseInt(soTabela.getProperty("id_tabela_av").toString()));
+			tabela.setNome(soTabela.getProperty("nome").toString());
+		}
+		return tabela;
 	}
 	
 	public boolean atualizarTabelaAvaliativa(TabelaAvaliativa tabela){

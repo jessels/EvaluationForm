@@ -20,7 +20,8 @@ public class CriarTabela extends Activity {
 	private Button volta;
 	private ListView listaTabela;
 	private TabelaAvaliativaDAO tabelaDAO;
-
+	private TabelaAvaliativa tabela;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,15 +40,16 @@ public class CriarTabela extends Activity {
 			@Override
 			public void onClick(View v) {
 				String nomeInsere = nomeTabela.getText().toString();
-
-				if (tabelaDAO.inserirTabelaAvaliativa(new TabelaAvaliativa(0,
-						nomeInsere))) {
-					Toast.makeText(getApplicationContext(),
-							"Proejto Criado Com sucesso", Toast.LENGTH_LONG);
+				tabela = tabelaDAO.inserirTabelaAvaliativa(new TabelaAvaliativa(0, nomeInsere));
+				if (tabela != null) {
+					Toast.makeText(getApplicationContext(),"Proejto Criado Com sucesso. ID: "+tabela.getId_tabela_av(), Toast.LENGTH_LONG).show();
+					Intent irTelaCriaCriterio = new Intent(getApplicationContext(), CriarCriterio.class);
+					Bundle informa = new Bundle();
+					
+				// colocar a tabela no bundle e colocar o bundle na intent
+					startActivity(irTelaCriaCriterio);
 				}
-				Intent irTelaCriaCriterio = new Intent(getApplicationContext(),
-						CriarCriterio.class);
-				startActivity(irTelaCriaCriterio);
+				
 			}
 		});
 		volta.setOnClickListener(new OnClickListener() {
