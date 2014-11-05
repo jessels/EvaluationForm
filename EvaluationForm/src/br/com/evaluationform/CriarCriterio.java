@@ -21,7 +21,6 @@ public class CriarCriterio extends Activity {
 	private Button btMais;
 	private EditText edDesc;
 	private EditText edPeso;
-	private Bundle informa;
 	private ListView listCrit;
 	private CriterioDAO criterioDAO;
 	private ArrayList<Criterio> listaCriterios;
