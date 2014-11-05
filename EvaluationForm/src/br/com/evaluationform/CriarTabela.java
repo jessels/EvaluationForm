@@ -45,8 +45,8 @@ public class CriarTabela extends Activity {
 					Toast.makeText(getApplicationContext(),"Proejto Criado Com sucesso. ID: "+tabela.getId_tabela_av(), Toast.LENGTH_LONG).show();
 					Intent irTelaCriaCriterio = new Intent(getApplicationContext(), CriarCriterio.class);
 					Bundle informa = new Bundle();
-					
-				// colocar a tabela no bundle e colocar o bundle na intent
+					informa.putInt("id", tabela.getId_tabela_av());
+					irTelaCriaCriterio.putExtras(informa);
 					startActivity(irTelaCriaCriterio);
 				}
 				

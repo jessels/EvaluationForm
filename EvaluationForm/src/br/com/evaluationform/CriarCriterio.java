@@ -2,10 +2,8 @@ package br.com.evaluationform;
 
 import java.util.ArrayList;
 
-import br.com.evaluationform.dao.Criterio;
-import br.com.evaluationform.dao.CriterioDAO;
-import br.com.evaluationform.dao.TabelaAvaliativa;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -14,12 +12,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+import br.com.evaluationform.dao.Criterio;
+import br.com.evaluationform.dao.CriterioDAO;
 
 public class CriarCriterio extends Activity {
 
 	private Button btMais;
 	private EditText edDesc;
 	private EditText edPeso;
+	private Bundle informa;
 	private ListView listCrit;
 	private CriterioDAO criterioDAO;
 	private ArrayList<Criterio> listaCriterios;
@@ -36,6 +38,12 @@ public class CriarCriterio extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		this.inicializaComponentes();
+		
+		Intent intent = getIntent();
+		Bundle informa = intent.getExtras();
+		final Integer id = informa.getInt("id");
+		
+		Toast.makeText(getApplicationContext(), ""+id, Toast.LENGTH_LONG).show();
 
 		btMais.setOnClickListener(new OnClickListener() {
 
@@ -43,7 +51,7 @@ public class CriarCriterio extends Activity {
 			public void onClick(View v) {
 				String descricao = edDesc.getText().toString();
 				int peso = Integer.parseInt(edPeso.getText().toString());
-				Criterio c = new Criterio(0, peso, descricao, );
+				Criterio c = new Criterio(0, peso, descricao, id);
 				criterioDAO.inserirCriterio(c);
 				atualizaAdapter();
 
@@ -76,5 +84,6 @@ public class CriarCriterio extends Activity {
 			}
 		}
 	}
+	
 
 }
