@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.evaluationform.dao.Projeto;
@@ -28,6 +31,7 @@ public class CriarAvaliacao extends Activity {
 	private ArrayAdapter<Usuario> adapterAvaliador;
 	private ArrayList<TabelaAvaliativa> listaTabela;
 	private ArrayAdapter<TabelaAvaliativa> adapterTabela;
+
 	
 
 	@Override
@@ -50,6 +54,25 @@ public class CriarAvaliacao extends Activity {
 					listaProjeto);
 
 			listProjeto.setAdapter(adapterProjeto);
+			
+			listProjeto.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view,
+						int position, long id) {
+					listProjeto.getAdapter().getItem(position).toString();
+					
+					
+					
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {
+					
+				}
+			});
+			
+		
 
 		}
 		listaAvaliador = avaliadorDAO.buscarTodosUsuarios();
@@ -60,6 +83,20 @@ public class CriarAvaliacao extends Activity {
 					listaAvaliador);
 			
 			listAvaliadores.setAdapter(adapterAvaliador);
+			
+			listAvaliadores.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view,
+						int position, long id) {
+					
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {
+					
+				}
+			});
 		}
 		
 			listaTabela = tabelaDAO.buscarTodasTabelas();
@@ -70,6 +107,20 @@ public class CriarAvaliacao extends Activity {
 					listaTabela);
 					
 				listTabela.setAdapter(adapterTabela);
+				
+				listTabela.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> parent,
+							View view, int position, long id) {
+						
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> parent) {
+						
+					}
+				});
 		}
 
 	}
