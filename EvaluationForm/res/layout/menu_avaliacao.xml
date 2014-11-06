@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tx_avaliacao_exibicao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:textSize="30dp"
+        android:text="Avaliação" />
+
+    <Button
+        android:id="@+id/bt_menu_avaliacao_criar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tx_avaliacao_exibicao"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Criar Avaliação" />
+
+    <Button
+        android:id="@+id/bt_menu_avaliacao_minhas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/bt_menu_avaliacao_criar"
+        android:layout_marginTop="20dp"
+        android:text="Minhas Avaliações" />
+
+    <Button
+        android:id="@+id/bt_menu_avaliacao_volta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/bt_menu_avaliacao_minhas"
+        android:layout_marginTop="60dp"
+        android:text="Voltar ao Menu" />
+
+</RelativeLayout>

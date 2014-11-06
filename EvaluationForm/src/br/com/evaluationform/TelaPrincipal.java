@@ -1,5 +1,6 @@
 package br.com.evaluationform;
 
+import br.com.evaluationform.abas.MenuAvaliacao;
 import br.com.evaluationform.abas.MenuEvento;
 import br.com.evaluationform.abas.MenuProjeto;
 import android.app.Activity;
@@ -60,7 +61,8 @@ public class TelaPrincipal extends Activity  {
 			
 			@Override
 			public void onClick(View v) {
-				//Intent irTelaAvaliacao = new Intent(getApplicationContext(), )
+				Intent irTelaAvaliacao = new Intent(getApplicationContext(), MenuAvaliacao.class);
+				startActivity(irTelaAvaliacao);
 			}
 		});
 		config.setOnClickListener(new OnClickListener() {

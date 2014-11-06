@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class TabelaAvaliativaDAO {
 	
-	private static final String URL = "http://192.168.240.136:8080/EvaluationWS4/services/TabelaAvaliativaDAO?wsdl";
+	private static final String URL = "http://192.168.241.116:8080/EvaluationWS4/services/TabelaAvaliativaDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirTabelaAvaliativa";
@@ -150,7 +150,7 @@ SoapObject buscarTodasTabelas = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 			for (SoapObject soapObject : resposta) {
 				
 				TabelaAvaliativa tav2 = new TabelaAvaliativa();
-				tav2.setId_tabela_av(	Integer.parseInt(soapObject.getProperty("id_tabel_av").toString()));
+				tav2.setId_tabela_av(	Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
 				tav2.setNome(soapObject.getProperty("nome").toString());
 				
 				

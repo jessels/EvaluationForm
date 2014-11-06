@@ -31,8 +31,7 @@ import java.io.Serializable;
 	
 		@Override
 		public String toString() {
-			return "Usuario [id=" + id + ", nome=" + nome + ", login=" + login
-					+ ", senha=" + senha + "]";
+			return nome;
 		}
 	
 		public String getNome() {
