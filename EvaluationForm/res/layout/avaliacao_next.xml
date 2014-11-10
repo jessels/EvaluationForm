@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.94" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tx_exibicao_avaliacao_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Selecione o Avaliador" />
+
+
+            <Spinner
+                android:id="@+id/spinner_de_avaliadores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+              <Button
+                android:id="@+id/bt_avaliacao_next_mais"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mais" />
+
+            <TextView
+                android:id="@+id/tx_avaliacao_next_avaliadores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Avaliadores" />
+
+            <ListView
+                android:id="@+id/lista_avaliadores"
+                android:layout_width="match_parent"
+                android:layout_height="233dp" >
+            </ListView>
+
+            <Button
+                android:id="@+id/bt_avaliacao_next_salva"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salvar" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

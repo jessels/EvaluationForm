@@ -59,6 +59,7 @@ public class CriarTabela extends Activity {
 				Intent voltaMenu = new Intent(getApplicationContext(),
 						TelaPrincipal.class);
 				startActivity(voltaMenu);
+				finish();
 			}
 		});
 	}

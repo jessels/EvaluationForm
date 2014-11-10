@@ -45,28 +45,14 @@
         android:layout_below="@+id/tx_avaliacao_projeto_sel"
         android:layout_marginTop="15dp" />
     
-      <TextView
-        android:id="@+id/tx_avaliacao_avaliador_sel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_projetp"
-        android:layout_marginTop="20dp"
-        android:text="Selecione o Avaliador"
-        android:textSize="20dp" />
       
-       <Spinner
-        android:id="@+id/spinner_avaliador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tx_avaliacao_avaliador_sel"
-        android:layout_marginTop="15dp" />
        
         <TextView
         android:id="@+id/tx_avaliacao_tabela_sel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_avaliador"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/spinner_projeto"
+        android:layout_marginTop="30dp"
         android:text="Selecione a Tabela"
         android:textSize="20dp" />
         
@@ -76,7 +62,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tx_avaliacao_tabela_sel"
         android:layout_marginTop="15dp" />
-    
+
+         <Button
+        android:id="@+id/bt_avaliacao_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="50dp"
+        android:text="next" /> 
+         
         </LinearLayout>
     </ScrollView>
 
