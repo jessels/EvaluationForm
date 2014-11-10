@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class ProjetoPorAlunoDAO {
 	
-	private static final String URL = "http://192.168.241.116:8080/EvaluationWS4/services/ProjetoPorAlunoDAO?wsdl";
+	private static final String URL = "http://192.168.241.100:8080/EvaluationWS4/services/ProjetoPorAlunoDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirProjetoPorAluno";

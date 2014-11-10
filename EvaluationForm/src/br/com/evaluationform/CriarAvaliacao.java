@@ -3,13 +3,15 @@ package br.com.evaluationform;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Spinner;
+import br.com.evaluationform.dao.Avaliacao;
 import br.com.evaluationform.dao.Projeto;
 import br.com.evaluationform.dao.ProjetoDAO;
 import br.com.evaluationform.dao.TabelaAvaliativa;
@@ -19,9 +21,9 @@ import br.com.evaluationform.dao.UsuarioDAO;
 
 public class CriarAvaliacao extends Activity {
 
-	private ListView listProjeto;
-	private ListView listAvaliadores;
-	private ListView listTabela;
+	private Spinner spProjeto;
+	private Spinner spAvaliador;
+	private Spinner spTabela;
 	private ProjetoDAO projetoDAO;
 	private UsuarioDAO avaliadorDAO;
 	private TabelaAvaliativaDAO tabelaDAO;
@@ -53,16 +55,18 @@ public class CriarAvaliacao extends Activity {
 					android.R.layout.simple_selectable_list_item,
 					listaProjeto);
 
-			listProjeto.setAdapter(adapterProjeto);
+			spProjeto.setAdapter(adapterProjeto);
 			
-			listProjeto.setOnItemSelectedListener(new OnItemSelectedListener() {
+			spProjeto.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int position, long id) {
-					listProjeto.getAdapter().getItem(position).toString();
-					
-					
+					Projeto projeto = new Projeto();
+					projeto = (Projeto) spProjeto.getAdapter().getItem(position);
+					Intent intent = new Intent(getApplicationContext(), Avaliacao.class);
+					intent.putExtra("id_projeto", projeto.getId_projeto());
+					startActivity(intent);
 					
 				}
 
@@ -82,9 +86,9 @@ public class CriarAvaliacao extends Activity {
 					android.R.layout.simple_selectable_list_item, 
 					listaAvaliador);
 			
-			listAvaliadores.setAdapter(adapterAvaliador);
+			spAvaliador.setAdapter(adapterAvaliador);
 			
-			listAvaliadores.setOnItemSelectedListener(new OnItemSelectedListener() {
+			spAvaliador.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view,
@@ -106,9 +110,9 @@ public class CriarAvaliacao extends Activity {
 					android.R.layout.simple_list_item_1, 
 					listaTabela);
 					
-				listTabela.setAdapter(adapterTabela);
+					spTabela.setAdapter(adapterTabela);
 				
-				listTabela.setOnItemSelectedListener(new OnItemSelectedListener() {
+					spTabela.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 					@Override
 					public void onItemSelected(AdapterView<?> parent,
@@ -125,9 +129,9 @@ public class CriarAvaliacao extends Activity {
 
 	}
 	private void inicializaComponentes() {
-		this.listProjeto = (ListView) findViewById(R.id.lista_avaliacao_projeto);
-		this.listAvaliadores = (ListView) findViewById(R.id.lista_avaliacao_avaliadores);
-		this.listTabela = (ListView) findViewById(R.id.lista_avaliacao_tabela);
+		this.spProjeto = (Spinner) findViewById(R.id.spinner_projeto);
+		this.spAvaliador = (Spinner) findViewById(R.id.spinner_avaliador);
+		this.spTabela = (Spinner) findViewById(R.id.spinner_tabela);
 		this.projetoDAO = new ProjetoDAO();
 		this.avaliadorDAO = new UsuarioDAO();
 		this.tabelaDAO = new TabelaAvaliativaDAO();
