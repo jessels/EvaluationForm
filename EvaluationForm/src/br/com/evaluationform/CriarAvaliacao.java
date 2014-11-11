@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 import br.com.evaluationform.dao.Projeto;
 import br.com.evaluationform.dao.ProjetoDAO;
 import br.com.evaluationform.dao.TabelaAvaliativa;
@@ -31,6 +32,8 @@ public class CriarAvaliacao extends Activity {
 	private ArrayAdapter<Projeto> adapterProjeto;
 	private ArrayList<TabelaAvaliativa> listaTabela;
 	private ArrayAdapter<TabelaAvaliativa> adapterTabela;
+	private TabelaAvaliativa tabelaSelecionado;
+	private Projeto projetoSelecionado;
 	
 
 	@Override
@@ -56,10 +59,6 @@ public class CriarAvaliacao extends Activity {
 //
 //			spProjeto.setAdapter(adapterProjeto);
 		
-		btNext.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
 				
 			
 			
@@ -68,12 +67,11 @@ public class CriarAvaliacao extends Activity {
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int position, long id) {
-					spProjeto.getAdapter().getItem(position);
-					Intent irTelaNext = new Intent(getApplicationContext(), CriarAvaliacaoNext.class);
-					Bundle selecProj = new Bundle();
-					selecProj.putInt("id_projeto", projeto.getId_projeto());
-					irTelaNext.putExtras(selecProj);
-					startActivity(irTelaNext);
+					projetoSelecionado = (Projeto)spProjeto.getAdapter().getItem(position);
+//					Intent irTelaNext = new Intent(getApplicationContext(), CriarAvaliacaoNext.class);
+//					Bundle selecProj = new Bundle();
+//					selecProj.putInt("id_projeto", projeto.getId_projeto());
+					
 					
 				}
 
@@ -83,8 +81,45 @@ public class CriarAvaliacao extends Activity {
 				}
 			});
 			
-			}
-		});
+			spTabela.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> parent,
+						View view, int position, long id) {
+					tabelaSelecionado = (TabelaAvaliativa)spTabela.getAdapter().getItem(position);
+//					Intent irTelaNext = new Intent(getApplicationContext(), CriarAvaliacaoNext.class);
+//					Bundle selecTabela = new Bundle();
+//					selecTabela.putInt("id_tabela", tabela.getId_tabela_av());
+//					irTelaNext.putExtras(selecTabela);
+//					startActivity(irTelaNext);
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {
+					
+				}
+			});
+			
+			btNext.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if(projetoSelecionado != null && tabelaSelecionado != null){
+						Intent irTelaNext = new Intent (getApplicationContext(), CriarAvaliacaoNext.class);
+						irTelaNext.putExtra("id_projeto", projeto.getId_projeto());
+						irTelaNext.putExtra("id_tabela", tabela.getId_tabela_av());
+						startActivity(irTelaNext);
+					}else{
+						if(projetoSelecionado == null){
+							Toast.makeText(getApplicationContext(), "Selecionar o Projeto", Toast.LENGTH_LONG).show();
+						}
+						if(tabelaSelecionado == null){
+							Toast.makeText(getApplicationContext(), "Selecionar a tabela", Toast.LENGTH_LONG).show();
+						}
+					}
+					
+				}
+			});
 
 		//}
 		
@@ -98,24 +133,7 @@ public class CriarAvaliacao extends Activity {
 //					
 //					spTabela.setAdapter(adapterTabela);
 				
-					spTabela.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-					@Override
-					public void onItemSelected(AdapterView<?> parent,
-							View view, int position, long id) {
-						spTabela.getAdapter().getItem(position);
-						Intent irTelaNext = new Intent(getApplicationContext(), CriarAvaliacaoNext.class);
-						Bundle selecProj = new Bundle();
-						selecProj.putInt("id_tabela", tabela.getId_tabela_av());
-						irTelaNext.putExtras(selecProj);
-						startActivity(irTelaNext);
-					}
-
-					@Override
-					public void onNothingSelected(AdapterView<?> parent) {
-						
-					}
-				});
+					
 		}
 			
 		

@@ -3,13 +3,15 @@ package br.com.evaluationform;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import br.com.evaluationform.dao.Projeto;
 import br.com.evaluationform.dao.Usuario;
 import br.com.evaluationform.dao.UsuarioDAO;
 
@@ -36,6 +38,17 @@ public class CriarAvaliacaoNext extends Activity{
 		}
 		this.inicializaComponentes();
 		
+		
+		Intent it = getIntent();
+		final Integer id_tabela = getIntent().getIntExtra("id_tabela", 0);
+		final Integer id_projeto = getIntent().getIntExtra("id_projeto", 0);
+		btMais.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
 	}
 	private void inicializaComponentes(){
 		this.spAvaliador = (Spinner) findViewById(R.id.spinner_de_avaliadores);
