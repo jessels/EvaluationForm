@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class AvaliacaoDAO {
 	
-	private static final String URL = "http://192.168.241.100:8080/EvaluationWS4/services/AvaliacaoDAO?wsdl";
+	private static final String URL = "http://192.168.240.155:8080/EvaluationWS4/services/AvaliacaoDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirAvaliacao";
@@ -31,7 +31,6 @@ public class AvaliacaoDAO {
 		aval.addProperty("id_projeto", avaliacao.getId_projeto());
 		aval.addProperty("id_tabela_av", avaliacao.getId_tabela_av());
 		aval.addProperty("id_usuario", avaliacao.getId_usuario());
-		aval.addProperty("observacao", avaliacao.getObservacao());
 		
 		inserirAvaliacao.addSoapObject(aval);
 		
@@ -67,7 +66,6 @@ public class AvaliacaoDAO {
 		aval.addProperty("id_projeto", avaliacao.getId_projeto());
 		aval.addProperty("id_tabela_av", avaliacao.getId_tabela_av());
 		aval.addProperty("id_usuario", avaliacao.getId_usuario());
-		aval.addProperty("observacao", avaliacao.getObservacao());
 		
 		
 		atualizarAvaliacao.addSoapObject(aval);
@@ -151,7 +149,6 @@ SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				aval.setId_tabela_av(	Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
 				aval.setId_usuario(	Integer.parseInt(soapObject.getProperty("id_usuario").toString()));
 				aval.setData_av(soapObject.getProperty("data_av").toString());
-				aval.setObservacao(soapObject.getProperty("observacao").toString());
 				
 				lista.add(aval);
 				
@@ -193,7 +190,6 @@ SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				aval.setId_tabela_av(	Integer.parseInt(resposta.getProperty("id_tabela_av").toString()));
 				aval.setId_usuario(	Integer.parseInt(resposta.getProperty("id_usuario").toString()));
 				aval.setData_av(resposta.getProperty("data_av").toString());
-				aval.setObservacao(resposta.getProperty("observacao").toString());
 				
 				
 				

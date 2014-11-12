@@ -46,6 +46,16 @@
                 android:layout_height="233dp" >
             </ListView>
 
+            <EditText
+                android:id="@+id/editData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:editable="false" >
+
+                <requestFocus />
+            </EditText>
+
             <Button
                 android:id="@+id/bt_avaliacao_next_salva"
                 android:layout_width="wrap_content"
