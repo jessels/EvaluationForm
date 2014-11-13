@@ -1,7 +1,10 @@
 package br.com.evaluationform;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -115,7 +118,16 @@ public class CriarAvaliacaoNext extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				Avaliacao a = new Avaliacao(0, avaliadorId, id_projeto, id_tabela, times.getData());
+				Date dateFormatada = new Date();
+				SimpleDateFormat sdp = new SimpleDateFormat("dd-MM-yyyy");
+				try {
+					dateFormatada = sdp.parse(editData.getText().toString());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				Avaliacao a = new Avaliacao(0, avaliadorId, id_projeto, id_tabela, dateFormatada.toString());
 				avaliacaoDAO.inserirAvaliacao(a);
 			}
 		});

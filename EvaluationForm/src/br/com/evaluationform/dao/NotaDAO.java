@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class NotaDAO {
 	
-	private static final String URL = "http://192.168.240.155:8080/EvaluationWS4/services/ProjetoDAO?wsdl";
+	private static final String URL = "http://192.168.241.213:8080/EvaluationWS4/services/ProjetoDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
 	
 	private static final String INSERIR = "inserirNota";
