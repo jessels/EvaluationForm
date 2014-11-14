@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -25,7 +26,6 @@ public class CriarAvaliacao extends Activity {
 	private Spinner spProjeto;
 	private Spinner spTabela;
 	private ProjetoDAO projetoDAO;
-	private Projeto projeto;
 	private TabelaAvaliativaDAO tabelaDAO;
 	private TabelaAvaliativa tabela;
 	private ArrayList<Projeto> listaProjeto;
@@ -68,6 +68,7 @@ public class CriarAvaliacao extends Activity {
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int position, long id) {
 					projetoSelecionado = (Projeto)spProjeto.getAdapter().getItem(position);
+					Log.i("DEBUG", "ID PROJETO: "+projetoSelecionado.getId_projeto());
 //					Intent irTelaNext = new Intent(getApplicationContext(), CriarAvaliacaoNext.class);
 //					Bundle selecProj = new Bundle();
 //					selecProj.putInt("id_projeto", projeto.getId_projeto());
@@ -106,8 +107,9 @@ public class CriarAvaliacao extends Activity {
 				public void onClick(View v) {
 					if(projetoSelecionado != null && tabelaSelecionado != null){
 						Intent irTelaNext = new Intent (getApplicationContext(), CriarAvaliacaoNext.class);
-						irTelaNext.putExtra("id_projeto", projeto.getId_projeto());
-						irTelaNext.putExtra("id_tabela", tabela.getId_tabela_av());
+						Log.i("DEBUG", "id "+projetoSelecionado.getId_projeto());
+						irTelaNext.putExtra("id_projeto", projetoSelecionado.getId_projeto());
+						irTelaNext.putExtra("id_tabela", tabelaSelecionado.getId_tabela_av());
 						startActivity(irTelaNext);
 					}else{
 						if(projetoSelecionado == null){
@@ -143,7 +145,6 @@ public class CriarAvaliacao extends Activity {
 		this.btNext = (Button) findViewById(R.id.bt_avaliacao_next);
 		this.spProjeto = (Spinner) findViewById(R.id.spinner_projeto);
 		this.spTabela = (Spinner) findViewById(R.id.spinner_tabela);
-		this.projeto = new Projeto();
 		this.projetoDAO = new ProjetoDAO();
 		this.tabelaDAO = new TabelaAvaliativaDAO();
 		this.tabela = new TabelaAvaliativa();

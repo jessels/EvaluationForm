@@ -1,6 +1,7 @@
 	package br.com.evaluationform.dao;
 
 import java.io.Serializable;
+import java.util.Date;
 	
 	public class Avaliacao implements Serializable{
 		
@@ -9,14 +10,14 @@ import java.io.Serializable;
 		private int id_usuario;
 		private int id_projeto;
 		private int id_tabela_av;
-		private String data_av;
+		private Date data_av;
 		
 		
 		public Avaliacao(){
 			
 		}
 		public Avaliacao(int id_avaliacao, int id_usuario, int id_projeto, int id_tabela_av,
-				String data_av) {
+				Date data_av) {
 			this.id_avaliacao = id_avaliacao;
 			this.id_usuario = id_usuario;
 			this.id_projeto = id_projeto;
@@ -48,10 +49,10 @@ import java.io.Serializable;
 			this.id_tabela_av = id_tabela_av;
 		}
 		
-		public String getData_av() {
+		public Date getData_av() {
 			return data_av;
 		}
-		public void setData_av(String data_av) {
+		public void setData_av(Date data_av) {
 			this.data_av = data_av;
 		}
 	

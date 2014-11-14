@@ -1,9 +1,11 @@
 package br.com.evaluationform.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 
 import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.MarshalDate;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -30,7 +32,7 @@ public class AvaliacaoDAO {
 		aval.addProperty("data_av", avaliacao.getData_av());
 		aval.addProperty("id_projeto", avaliacao.getId_projeto());
 		aval.addProperty("id_tabela_av", avaliacao.getId_tabela_av());
-		aval.addProperty("id_usuario", avaliacao.getId_usuario());
+		aval.addProperty("id_avaliador", avaliacao.getId_usuario());
 		
 		inserirAvaliacao.addSoapObject(aval);
 		
@@ -38,6 +40,8 @@ public class AvaliacaoDAO {
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(inserirAvaliacao);
 		envelope.implicitTypes = true;
+		
+		new MarshalDate().register(envelope);
 		
 		HttpTransportSE http = new HttpTransportSE(URL);
 		try {
@@ -148,7 +152,7 @@ SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				aval.setId_projeto(	  Integer.parseInt(soapObject.getProperty("id_projeto").toString()));
 				aval.setId_tabela_av(	Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
 				aval.setId_usuario(	Integer.parseInt(soapObject.getProperty("id_usuario").toString()));
-				aval.setData_av(soapObject.getProperty("data_av").toString());
+				aval.setData_av((Date)soapObject.getProperty("data_av"));
 				
 				lista.add(aval);
 				
@@ -189,7 +193,7 @@ SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 				aval.setId_projeto(	  Integer.parseInt(resposta.getProperty("id_projeto").toString()));
 				aval.setId_tabela_av(	Integer.parseInt(resposta.getProperty("id_tabela_av").toString()));
 				aval.setId_usuario(	Integer.parseInt(resposta.getProperty("id_usuario").toString()));
-				aval.setData_av(resposta.getProperty("data_av").toString());
+				aval.setData_av((Date)resposta.getProperty("data_av"));
 				
 				
 				

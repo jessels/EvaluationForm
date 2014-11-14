@@ -11,6 +11,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -40,7 +41,6 @@ public class CriarAvaliacaoNext extends Activity{
 	private ArrayAdapter<Usuario> adapterAvaliador;
 	private int avaliadorId;
 	public EditText editData;
-	private DatePicker dataAvaliacao;
 	private int ano, mes, dia;
 	
 	@Override
@@ -77,9 +77,9 @@ public class CriarAvaliacaoNext extends Activity{
 			}
 		});
 		
-		final ArrayList<String> listaAvaliador2 = new ArrayList<String>();
+		final ArrayList<Usuario> listaAvaliador2 = new ArrayList<Usuario>();
 			
-		final ArrayAdapter<String> adapterAvaliador2 = new ArrayAdapter<>(CriarAvaliacaoNext.this, 
+		final ArrayAdapter<Usuario> adapterAvaliador2 = new ArrayAdapter<Usuario>(CriarAvaliacaoNext.this, 
 				android.R.layout.simple_list_item_1, listaAvaliador2);
 		
 		spAvaliador.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -88,10 +88,9 @@ public class CriarAvaliacaoNext extends Activity{
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 				id_click = position;
-				avaliador = listaAvaliador.get(position).getNome().toString();
-				avaliadorId = listaAvaliador.get(position).getId();
-				listaAvaliador2.add(avaliador);
-				
+//				avaliador = listaAvaliador.get(position).getNome().toString();
+//				avaliadorId = listaAvaliador.get(position).getId();
+				listaAvaliador2.add(listaAvaliador.get(position));
 			}
 
 			@Override
@@ -104,6 +103,7 @@ public class CriarAvaliacaoNext extends Activity{
 		Intent it = getIntent();
 		final Integer id_tabela = getIntent().getIntExtra("id_tabela", 0);
 		final Integer id_projeto = getIntent().getIntExtra("id_projeto", 0);
+		Log.i("DEBUG", ""+id_projeto);
 		btMais.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -118,16 +118,21 @@ public class CriarAvaliacaoNext extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				Date dateFormatada = new Date();
-				SimpleDateFormat sdp = new SimpleDateFormat("dd-MM-yyyy");
+				Date dateFormatada=null;
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//				Calendar calendario = Calendar.getInstance();
+//				calendario.setLenient(false);
+//				calendario.setTimeZone(TimeZone.getTimeZone("GMT"));
+//				dateFormatada = calendario.getTime();
+				
 				try {
-					dateFormatada = sdp.parse(editData.getText().toString());
+					dateFormatada = sdf.parse("2014-10-13");
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				Avaliacao a = new Avaliacao(0, avaliadorId, id_projeto, id_tabela, dateFormatada.toString());
+				Log.i("DEBUG", "ID USER "+listaAvaliador2.get(0).getId());
+				Avaliacao a = new Avaliacao(0, listaAvaliador2.get(0).getId(), id_projeto, id_tabela, dateFormatada);
 				avaliacaoDAO.inserirAvaliacao(a);
 			}
 		});

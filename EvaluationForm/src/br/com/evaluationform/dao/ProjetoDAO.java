@@ -141,7 +141,7 @@ SoapObject buscarTodosProjetos = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 			for (SoapObject soapObject : resposta) {
 				
 				Projeto proj = new Projeto();
-				proj.setId_projeto(	Integer.parseInt(soapObject.getProperty("id_projeto").toString()));
+				proj.setId_projeto(Integer.parseInt(soapObject.getProperty("id_projeto").toString()));
 				proj.setNome(soapObject.getProperty("nome").toString());
 				proj.setId_evento(Integer.parseInt(soapObject.getProperty("id_evento").toString()));
 				
