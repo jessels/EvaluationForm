@@ -42,6 +42,7 @@ public class CriarAvaliacaoNext extends Activity{
 	private int avaliadorId;
 	public EditText editData;
 	private int ano, mes, dia;
+	private int i;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +109,7 @@ public class CriarAvaliacaoNext extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				listAvaliador.setAdapter(adapterAvaliador2);
+				//listAvaliador.setAdapter(adapterAvaliador2);
 				listaAvaliador.get(id_click);
 				listaAvaliador.remove(listaAvaliador.get(id_click));
 				listAvaliador.setAdapter(adapterAvaliador2);
@@ -118,22 +119,28 @@ public class CriarAvaliacaoNext extends Activity{
 			
 			@Override
 			public void onClick(View v) {
+				String dataDigitada = editData.getText().toString();
 				Date dateFormatada=null;
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
 //				Calendar calendario = Calendar.getInstance();
 //				calendario.setLenient(false);
 //				calendario.setTimeZone(TimeZone.getTimeZone("GMT"));
 //				dateFormatada = calendario.getTime();
 				
 				try {
-					dateFormatada = sdf.parse(editData.getText().toString());
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+					dateFormatada = sdf.parse(dataDigitada);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Log.i("DEBUG", "ID USER "+listaAvaliador2.get(0).getId());
-				Avaliacao a = new Avaliacao(0, listaAvaliador2.get(0).getId(), id_projeto, id_tabela, dateFormatada);
-				avaliacaoDAO.inserirAvaliacao(a);
+				Log.i("data", "ID USER "+dateFormatada);
+			
+				for(i=0; i<listaAvaliador2.size(); i++){
+					Log.i("DEBUG", "ID USER "+listaAvaliador2.get(i).getId());
+					Avaliacao a = new Avaliacao(0, listaAvaliador2.get(i).getId(), id_projeto, id_tabela, dateFormatada);
+					avaliacaoDAO.inserirAvaliacao(a);
+				}
 			}
 		});
 	}
