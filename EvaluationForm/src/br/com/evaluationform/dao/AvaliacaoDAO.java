@@ -21,6 +21,7 @@ public class AvaliacaoDAO {
 	private static final String	ATUALIZAR = "atualizarAvaliacao";
 	private static final String BUSCAR_TODOS = "buscarTodasAvaliacoes";
 	private static final String BUSCAR_POR_ID = "buscarAvaliacaoPorId";
+	private static final String BUSCAR_USER = "buscarUsuarioPorId";
 	
 	public boolean inserirAvaliacao(Avaliacao avaliacao){
 		
@@ -131,7 +132,7 @@ public class AvaliacaoDAO {
 		
 SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 		
-		SoapObject usr = new SoapObject(NAMESPACE, "avaliacao");
+		SoapObject avalia = new SoapObject(NAMESPACE, "avaliacao");
 		
 		
 		
@@ -169,12 +170,53 @@ SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 		return lista;
 	}
 	
+	public Avaliacao buscarAvaliacaoPorUsuario(int id){
+		Avaliacao aval = null;
+		
+		SoapObject buscarAvaliacaoPorUsuario = new SoapObject(NAMESPACE, BUSCAR_USER);
+		
+		SoapObject avalia = new SoapObject(NAMESPACE, "avaliacao");
+		buscarAvaliacaoPorUsuario.addProperty("id_user", id);
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		envelope.setOutputSoapObject(buscarAvaliacaoPorUsuario);
+		envelope.implicitTypes = true;
+		
+		HttpTransportSE http = new HttpTransportSE(URL);
+		try {
+			http.call("urn" + BUSCAR_USER, envelope);
+			
+			SoapObject resposta = (SoapObject) envelope.getResponse();
+			
+				aval = new Avaliacao();
+				
+				aval.setId_avaliacao(	Integer.parseInt(resposta.getProperty("id_avaliacao").toString()));
+				aval.setId_projeto(	  Integer.parseInt(resposta.getProperty("id_projeto").toString()));
+				aval.setId_tabela_av(	Integer.parseInt(resposta.getProperty("id_tabela_av").toString()));
+				aval.setId_usuario(	Integer.parseInt(resposta.getProperty("id_usuario").toString()));
+				aval.setData_av((Date)resposta.getProperty("data_av"));
+				
+				
+				
+				
+			
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		
+		}
+		
+		return aval;
+		
+		
+	}
 	public Avaliacao buscarAvaliacaoPorId(int id){
 		Avaliacao aval = null;
 		
 		SoapObject buscarAvaliacaoPorId = new SoapObject(NAMESPACE, BUSCAR_POR_ID);
 		
-		SoapObject user = new SoapObject(NAMESPACE, "usuario");
+		SoapObject avalia = new SoapObject(NAMESPACE, "avaliacao");
 		buscarAvaliacaoPorId.addProperty("id_avaliacao", id);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

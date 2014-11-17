@@ -1,36 +1,28 @@
 package br.com.evaluationform;
 
-import br.com.evaluationform.abas.MenuAvaliacao;
-import br.com.evaluationform.abas.MenuEvento;
-import br.com.evaluationform.abas.MenuProjeto;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
+import br.com.evaluationform.abas.MenuAvaliacao;
+import br.com.evaluationform.abas.MenuEvento;
+import br.com.evaluationform.abas.MenuProjeto;
+import br.com.evaluationform.dao.Usuario;
 
-public class TelaPrincipal extends Activity  {
+public class TelaPrincipal extends Activity {
 	
-	private Button menuEvento;
-	private Button menuProjeto;
-	private Button menuTabela;
-	private Button menuAvaliacao;
-	private Button config;
-	
-	
-	
+	private TextView tvUsuarioLogado, tvSenhaLogado;
+	private Usuario usuario;
+	private Button btDeslogar, menuEvento, menuTabela, menuProjeto, menuAvaliacao, config;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tela_principal);
-		
-		if (android.os.Build.VERSION.SDK_INT > 9) {
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-					.permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-		}
 		this.inicializaComponentes();
 		
 		menuEvento.setOnClickListener(new OnClickListener() {
@@ -73,15 +65,40 @@ public class TelaPrincipal extends Activity  {
 			}
 		});
 		
+//		this.tvUsuarioLogado.setText(this.tvUsuarioLogado.getText()+this.usuario.getLogin());
+//		this.tvSenhaLogado.setText(this.tvSenhaLogado.getText()+this.usuario.getSenha());
+//		this.btDeslogar.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				limparSharedPreferences();
+//				Intent intentAutenticacao = new Intent(getApplicationContext(),TelaLogin.class);
+//				startActivity(intentAutenticacao);
+//				finish();
+//			}
+//		});
+		
 	}
 	
-	private void inicializaComponentes(){
+	private void limparSharedPreferences() {
+		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		Editor editarPreferencias = spPreferencias.edit();
+		editarPreferencias.clear();	
+		editarPreferencias.commit();
+	}
+	
+	private void inicializaComponentes() {
+//		this.tvUsuarioLogado = (TextView)findViewById(R.id.tv_usuario_logado);
+//		this.tvSenhaLogado = (TextView)findViewById(R.id.tv_senha_logado);
+//		this.btDeslogar = (Button)findViewById(R.id.bt_deslogar);
 		this.menuEvento = (Button) findViewById(R.id.menu_evento);
 		this.menuProjeto = (Button) findViewById(R.id.menu_projeto);
 		this.menuTabela = (Button) findViewById(R.id.menu_tabela);
 		this.menuAvaliacao = (Button) findViewById(R.id.menu_avaliacao);
 		this.config = (Button) findViewById(R.id.menu_config);
 		
+		Bundle bundle = getIntent().getExtras();
+		this.usuario =  (Usuario)bundle.getSerializable("usuario");
 	}
 	
 }

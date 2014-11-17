@@ -36,7 +36,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="32dp"
         android:ems="10"
-        android:hint="Nome do Projeto" />
+        android:hint="Nome do Evento" />
 
     <EditText
         android:id="@+id/ed_instit"
