@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -13,14 +14,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import br.com.evaluationform.CriarEvento;
 import br.com.evaluationform.R;
+import br.com.evaluationform.TelaLogin;
 import br.com.evaluationform.dao.Evento;
 import br.com.evaluationform.dao.EventoDAO;
+import br.com.evaluationform.dao.Usuario;
 
 public class MenuEvento extends Activity {
 
 	private Button criaEvento;
 	private ListView listaMostraEvento;
 	private EventoDAO eventoDAO;
+	private Usuario usuario;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,9 @@ public class MenuEvento extends Activity {
 		this.criaEvento = (Button) findViewById(R.id.bt_evento_criar);
 		this.listaMostraEvento = (ListView) findViewById(R.id.lista_menu_evento);
 		this.eventoDAO = new EventoDAO();
+		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario.setId(preferencia.getInt("id", 0));
+		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 
 	}
 

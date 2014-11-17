@@ -2,6 +2,7 @@ package br.com.evaluationform;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import br.com.evaluationform.dao.TabelaAvaliativa;
 import br.com.evaluationform.dao.TabelaAvaliativaDAO;
+import br.com.evaluationform.dao.Usuario;
 
 public class CriarTabela extends Activity {
 
@@ -21,6 +23,7 @@ public class CriarTabela extends Activity {
 	private ListView listaTabela;
 	private TabelaAvaliativaDAO tabelaDAO;
 	private TabelaAvaliativa tabela;
+	private Usuario usuario;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,9 @@ public class CriarTabela extends Activity {
 		this.volta = (Button) findViewById(R.id.bt_menu_tabela_voltar);
 		this.tabelaDAO = new TabelaAvaliativaDAO();
 		this.listaTabela = (ListView) findViewById(R.id.lista_menu_tabela);
+		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario.setId(preferencia.getInt("id", 0));
+		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 
 	}
 

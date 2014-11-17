@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import br.com.evaluationform.dao.Criterio;
 import br.com.evaluationform.dao.CriterioDAO;
+import br.com.evaluationform.dao.Usuario;
 
 public class CriarCriterio extends Activity {
 
@@ -23,6 +25,7 @@ public class CriarCriterio extends Activity {
 	private EditText edPeso;
 	private ListView listCrit;
 	private CriterioDAO criterioDAO;
+	private Usuario usuario;
 	private ArrayList<Criterio> listaCriterios;
 	private ArrayAdapter<Criterio> criterioAdapter;
 
@@ -63,6 +66,9 @@ public class CriarCriterio extends Activity {
 		this.edDesc = (EditText) findViewById(R.id.ed_desc);
 		this.edPeso = (EditText) findViewById(R.id.ed_peso);
 		this.listCrit = (ListView) findViewById(R.id.list_crit);
+		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario.setId(preferencia.getInt("id", 0));
+		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 		this.criterioDAO = new CriterioDAO();
 		atualizaAdapter();
 

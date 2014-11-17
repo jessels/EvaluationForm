@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -18,6 +19,7 @@ import br.com.evaluationform.dao.Evento;
 import br.com.evaluationform.dao.EventoDAO;
 import br.com.evaluationform.dao.Projeto;
 import br.com.evaluationform.dao.ProjetoDAO;
+import br.com.evaluationform.dao.Usuario;
 
 public class CriarProjeto extends Activity {
 
@@ -28,6 +30,7 @@ public class CriarProjeto extends Activity {
 	private ProjetoDAO projetoDAO;
 	private EventoDAO eventoDAO;
 	private Evento eventoSelecionado;
+	private Usuario usuario;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,9 @@ public class CriarProjeto extends Activity {
 		this.btVolta = (Button) findViewById(R.id.bt_projeto_voltar);
 		this.projetoDAO = new ProjetoDAO();
 		this.eventoDAO = new EventoDAO();
+		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario.setId(preferencia.getInt("id", 0));
+		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 		
 		ArrayList<Evento> listaEventos = eventoDAO.buscarTodosEventos();
 		if (listaEventos != null) {
