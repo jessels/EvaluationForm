@@ -126,7 +126,7 @@ public class CriarAvaliacaoNext extends Activity{
 //				dateFormatada = calendario.getTime();
 				
 				try {
-					dateFormatada = sdf.parse("2014-10-13");
+					dateFormatada = sdf.parse(editData.getText().toString());
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
