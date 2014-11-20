@@ -73,9 +73,9 @@ public class CriarTabela extends Activity {
 		this.volta = (Button) findViewById(R.id.bt_menu_tabela_voltar);
 		this.tabelaDAO = new TabelaAvaliativaDAO();
 		this.listaTabela = (ListView) findViewById(R.id.lista_menu_tabela);
-		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
-		this.usuario.setId(preferencia.getInt("id", 0));
-		this.usuario.setLogin(preferencia.getString("login", "login falso"));
+//		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+//		this.usuario.setId(preferencia.getInt("id", 0));
+//		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 
 	}
 

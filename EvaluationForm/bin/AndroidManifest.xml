@@ -37,6 +37,7 @@
         <activity android:name=".abas.MenuAvaliacao"></activity>
         <activity android:name="CriarAvaliacao"></activity>
         <activity android:name="CriarAvaliacaoNext"></activity>
+        <activity android:name="MinhasAvaliacoes"></activity>
     </application>
 
 </manifest>

@@ -11,8 +11,8 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class CriterioDAO {
 	
-	private static final String URL = "http://192.168.241.187:8080/EvaluationWS4/services/CriterioDAO?wsdl";
-	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
+	private static final String URL = "http://192.168.240.43:8080/EvaluationWSv2/services/CriterioDAO?wsdl";
+	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirCriterio";
 	private static final String	EXCLUIR = "excluirCriterio";

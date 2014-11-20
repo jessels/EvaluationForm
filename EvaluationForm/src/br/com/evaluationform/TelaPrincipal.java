@@ -19,11 +19,16 @@ public class TelaPrincipal extends Activity {
 	private TextView tvUsuarioLogado, tvSenhaLogado;
 	private Usuario usuario;
 	private Button btDeslogar, menuEvento, menuTabela, menuProjeto, menuAvaliacao, config;
+	
+	Sessao sessao;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tela_principal);
 		this.inicializaComponentes();
+		
+		sessao = new Sessao(getApplicationContext());
 		
 		menuEvento.setOnClickListener(new OnClickListener() {
 			
@@ -80,12 +85,12 @@ public class TelaPrincipal extends Activity {
 		
 	}
 	
-	private void limparSharedPreferences() {
-		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
-		Editor editarPreferencias = spPreferencias.edit();
-		editarPreferencias.clear();	
-		editarPreferencias.commit();
-	}
+//	private void limparSharedPreferences() {
+//		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+//		Editor editarPreferencias = spPreferencias.edit();
+//		editarPreferencias.clear();	
+//		editarPreferencias.commit();
+//	}
 	
 	private void inicializaComponentes() {
 //		this.tvUsuarioLogado = (TextView)findViewById(R.id.tv_usuario_logado);
@@ -97,8 +102,10 @@ public class TelaPrincipal extends Activity {
 		this.menuAvaliacao = (Button) findViewById(R.id.menu_avaliacao);
 		this.config = (Button) findViewById(R.id.menu_config);
 		
+		Intent irTelaPrincipal = getIntent();
 		Bundle bundle = getIntent().getExtras();
-		this.usuario =  (Usuario)bundle.getSerializable("usuario");
+		irTelaPrincipal.putExtras(bundle);
+		usuario =  (Usuario)bundle.getSerializable("usuario");
 	}
 	
 }

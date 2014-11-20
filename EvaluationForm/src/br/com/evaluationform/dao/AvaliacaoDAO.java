@@ -13,15 +13,16 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class AvaliacaoDAO {
 	
-	private static final String URL = "http://192.168.241.187:8080/EvaluationWS4/services/AvaliacaoDAO?wsdl";
-	private static final String NAMESPACE = "http://evaluationWS.evaluation.com.br";
+	private static final String URL = "http://192.168.240.43:8080/EvaluationWSv2/services/AvaliacaoDAO?wsdl";
+	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirAvaliacao";
 	private static final String	EXCLUIR = "excluirAvaliacao";
 	private static final String	ATUALIZAR = "atualizarAvaliacao";
 	private static final String BUSCAR_TODOS = "buscarTodasAvaliacoes";
 	private static final String BUSCAR_POR_ID = "buscarAvaliacaoPorId";
-	private static final String BUSCAR_USER = "buscarUsuarioPorId";
+	private static final String BUSCAR_USER = "buscarAvaliacaoPorUsuario";
+	
 	
 	public boolean inserirAvaliacao(Avaliacao avaliacao){
 		
@@ -170,13 +171,15 @@ SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 		return lista;
 	}
 	
-	public Avaliacao buscarAvaliacaoPorUsuario(int id){
-		Avaliacao aval = null;
+	public ArrayList<Avaliacao> buscarAvaliacaoPorUsuario(int id_user){
+		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
 		
 		SoapObject buscarAvaliacaoPorUsuario = new SoapObject(NAMESPACE, BUSCAR_USER);
 		
 		SoapObject avalia = new SoapObject(NAMESPACE, "avaliacao");
-		buscarAvaliacaoPorUsuario.addProperty("id_user", id);
+		buscarAvaliacaoPorUsuario.addProperty("id_user", id_user);
+		
+		
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(buscarAvaliacaoPorUsuario);
@@ -186,19 +189,20 @@ SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 		try {
 			http.call("urn" + BUSCAR_USER, envelope);
 			
-			SoapObject resposta = (SoapObject) envelope.getResponse();
+			Vector<SoapObject> resposta = (Vector<SoapObject>) envelope.getResponse();
 			
-				aval = new Avaliacao();
+			for (SoapObject soapObject : resposta) {
 				
-				aval.setId_avaliacao(	Integer.parseInt(resposta.getProperty("id_avaliacao").toString()));
-				aval.setId_projeto(	  Integer.parseInt(resposta.getProperty("id_projeto").toString()));
-				aval.setId_tabela_av(	Integer.parseInt(resposta.getProperty("id_tabela_av").toString()));
-				aval.setId_usuario(	Integer.parseInt(resposta.getProperty("id_usuario").toString()));
-				aval.setData_av((Date)resposta.getProperty("data_av"));
+				Avaliacao aval= new Avaliacao();
+				aval.setId_avaliacao(Integer.parseInt(soapObject.getProperty("id_avaliacao").toString()));
+				aval.setId_projeto(Integer.parseInt(soapObject.getProperty("id_projeto").toString()));
+				aval.setId_tabela_av(Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
+				aval.setId_usuario(Integer.parseInt(soapObject.getProperty("id_usuario").toString()));
+				aval.setData_av((Date)soapObject.getProperty("data_av"));
 				
+				lista.add(aval);
 				
-				
-				
+			}
 			
 				
 		} catch (Exception e) {
@@ -207,9 +211,8 @@ SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 		
 		}
 		
-		return aval;
 		
-		
+		return lista;
 	}
 	public Avaliacao buscarAvaliacaoPorId(int id){
 		Avaliacao aval = null;

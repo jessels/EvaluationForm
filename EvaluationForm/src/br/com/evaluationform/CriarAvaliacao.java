@@ -19,6 +19,7 @@ import br.com.evaluationform.dao.Projeto;
 import br.com.evaluationform.dao.ProjetoDAO;
 import br.com.evaluationform.dao.TabelaAvaliativa;
 import br.com.evaluationform.dao.TabelaAvaliativaDAO;
+import br.com.evaluationform.dao.Usuario;
 
 public class CriarAvaliacao extends Activity {
 
@@ -34,6 +35,7 @@ public class CriarAvaliacao extends Activity {
 	private ArrayAdapter<TabelaAvaliativa> adapterTabela;
 	private TabelaAvaliativa tabelaSelecionado;
 	private Projeto projetoSelecionado;
+	private Usuario usuario;
 	
 
 	@Override
@@ -148,6 +150,8 @@ public class CriarAvaliacao extends Activity {
 		this.projetoDAO = new ProjetoDAO();
 		this.tabelaDAO = new TabelaAvaliativaDAO();
 		this.tabela = new TabelaAvaliativa();
+		Bundle bundle = getIntent().getExtras();
+		usuario =  (Usuario)bundle.getSerializable("usuario");
 		
 		
 		listaProjeto = projetoDAO.buscarTodosProjetos();

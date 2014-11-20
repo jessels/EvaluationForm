@@ -1,99 +1,110 @@
 package br.com.evaluationform;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import br.com.evaluationform.dao.Usuario;
+import br.com.evaluationform.dao.UsuarioDAO;
 
 public class TelaLogin extends Activity {
-
-	private EditText ed_login, ed_Senha;
-	private Button btAutenticar;
+	
+	private EditText edLogin;
+	private EditText edSenha;
+	private Button btEntrar;
+	private Button btRegistro;
+	private Sessao sessao;
 	private Usuario usuario;
-	public final static String NOME_PREFERENCIA = "preferencias_usuario";
-	private SharedPreferences spPreferencias;
-	private Editor editarPreferencias;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		spPreferencias = getApplicationContext().getSharedPreferences(NOME_PREFERENCIA, MODE_APPEND);
-		editarPreferencias = spPreferencias.edit();
-		this.usuario = new Usuario();
+		setContentView(R.layout.tela_login);
+
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+					.permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
+		this.inicializaComponentes();
+
 		
-		if (verificaSeUsuarioJaLogou()) {
-			// USUÁRIO JÁ LOGOU, PULAR PARA OUTRA ACTIVITY
-			this.chamaTelaUsuarioLogado();
 
-		} else {
-			// USUÁRIO NUNCA LOGOU, MOSTRAR ACTIVITY DE LOGIN E SENHA
-			setContentView(R.layout.tela_login);
-			this.inicializaComponentes();						
-			this.btAutenticar.setOnClickListener(new OnClickListener() {
+		btEntrar.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View arg0) {
-					// CHAMAR METODO NO WEB SERVICE(Através do UsuarioDAO) QUE
-					// RETORNA UM USUARIO CASO ESTEJA CORRETA A AUTENTICACAO
-					// CASO CONTRARIO RETORNA NULL
-					usuario.setLogin(ed_login.getText().toString());
-					usuario.setSenha(ed_Senha.getText().toString());
-					if(verificaPreenchimento()) {						
-						editarPreferencias.putString("usuario", usuario.getLogin());
-						editarPreferencias.putString("senha", usuario.getSenha());
-						editarPreferencias.putInt("id", usuario.getId());
-						editarPreferencias.commit();
-						chamaTelaUsuarioLogado();
-					}else {
-						Toast.makeText(TelaLogin.this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
-					}
-					
+			@Override
+			public void onClick(View v) {
+				String login = edLogin.getText().toString();
+				String senha = edSenha.getText().toString();
+				String codSenha = null;
+				Log.i("Teste", "login: " + edLogin.getText().toString());
+
+				try {
+					MessageDigest md = MessageDigest.getInstance("MD5");
+					md.update(senha.getBytes("UTF-8"));
+					BigInteger hash = new BigInteger(1, md.digest());
+					codSenha = hash.toString(16);
+				} catch (NoSuchAlgorithmException e1) {
+					e1.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
 				}
-			});
 
-		}
+				if (login.trim().length() > 0 && codSenha.trim().length() > 0) {
+					UsuarioDAO dao = new UsuarioDAO();
+					Usuario dados = dao.buscarUsuarioPorLogin(login);
+
+					if (dados != null) {
+
+						if (login.equals(dados.getLogin())
+								&& codSenha.equals(dados.getSenha())) {
+							sessao.CriarSessao(dados.getId(), dados.getNome(),
+									dados.getLogin());
+
+							Intent irTelaPrincipal = new Intent(getApplicationContext(),TelaPrincipal.class);
+							Bundle bundle = new Bundle();
+							bundle.putSerializable("usuario", usuario);
+							irTelaPrincipal.putExtras(bundle);
+							startActivity(irTelaPrincipal);
+							finish();
+						}
+					}
+
+				}
+
+			}
+
+		});
+		btRegistro.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent irTelaCadastro = new Intent(getApplicationContext(),
+						TelaCadastro.class);
+				startActivity(irTelaCadastro);
+				finish();
+
+			}
+
+		});
+
+	}
+	private void inicializaComponentes(){
+		this.edLogin = (EditText) findViewById(R.id.ed_login);
+		this.edSenha = (EditText) findViewById(R.id.ed_senha);
+		this.btEntrar = (Button) findViewById(R.id.bt_entrar);
+		this.btRegistro = (Button) findViewById(R.id.bt_registro);
+		this.sessao = new Sessao(getApplicationContext());
 	}
 
-	private boolean verificaSeUsuarioJaLogou() {
-		boolean logou = false;
-		String strLogin = spPreferencias.getString("login", null);
-		String strSenha = spPreferencias.getString("senha", null);
-		if (strLogin != null && strSenha != null) {
-			this.usuario.setLogin(strLogin);
-			this.usuario.setSenha(strSenha);
-			logou = true;
-		}
-		return logou;
-	}
-
-	private void inicializaComponentes() {
-		this.ed_login = (EditText) findViewById(R.id.ed_login);
-		this.ed_Senha = (EditText) findViewById(R.id.ed_senha);
-		this.btAutenticar = (Button) findViewById(R.id.bt_entrar);		
-	}
-
-	private void chamaTelaUsuarioLogado() {
-		Intent intentUsuarioLogado = new Intent(this, TelaPrincipal.class);
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("usuario", this.usuario);
-		intentUsuarioLogado.putExtras(bundle);
-		startActivity(intentUsuarioLogado);
-		finish();
-	}
-	
-	private boolean verificaPreenchimento() {
-		boolean preencheu = true;
-		if(this.usuario.getLogin().equals("")||this.usuario.getSenha().equals("")) {
-			return false;
-		}		
-		return preencheu;
-	}
-	
 }

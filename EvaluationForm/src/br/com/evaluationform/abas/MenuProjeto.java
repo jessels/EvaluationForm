@@ -63,9 +63,9 @@ public class MenuProjeto extends Activity{
 	private void inicializaComponentes(){
 		this.criaProjeto = (Button) findViewById(R.id.bt_menu_projeto_criar);
 		this.listProjeto = (ListView) findViewById(R.id.lista_menu_projeto);
-		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
-		this.usuario.setId(preferencia.getInt("id", 0));
-		this.usuario.setLogin(preferencia.getString("login", "login falso"));
+//		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+//		this.usuario.setId(preferencia.getInt("id", 0));
+//		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 		this.projetoDAO = new ProjetoDAO();
 	}
 
