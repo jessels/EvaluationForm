@@ -25,7 +25,6 @@ public class TelaCadastro extends Activity {
 	private EditText confSenha;
 	private Button usar;
 	private Button registro;
-	private Sessao sessao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +77,9 @@ public class TelaCadastro extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent irTelaPrincipal = new Intent(getApplicationContext(),
-						TelaPrincipal.class);
-				startActivity(irTelaPrincipal);
+				Intent voltaTelaLogin = new Intent(getApplicationContext(),
+						TelaLogin.class);
+				startActivity(voltaTelaLogin);
 				finish();
 
 			}
@@ -94,6 +93,5 @@ public class TelaCadastro extends Activity {
 		this.confSenha = (EditText) findViewById(R.id.ed_con_senha);
 		this.usar = (Button) findViewById(R.id.btUsar);
 		this.registro = (Button) findViewById(R.id.bt_registro);
-		this.sessao = new Sessao(getApplicationContext());
 	}
 }

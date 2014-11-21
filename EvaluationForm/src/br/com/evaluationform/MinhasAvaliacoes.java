@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -43,8 +42,7 @@ public class MinhasAvaliacoes extends Activity{
 			StrictMode.setThreadPolicy(policy);
 		}
 		this.inicializaComponentes();
-		
-		sessao = new Sessao(getApplicationContext());
+		this.recuperaPreferencia();
 		
 		lista_avaliacao.setOnItemClickListener(new OnItemClickListener() {
 
@@ -81,22 +79,16 @@ public class MinhasAvaliacoes extends Activity{
 			}
 		});
 	}
-	
+	private void recuperaPreferencia(){
+		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario = new Usuario();
+		this.usuario.setId(spPreferencias.getInt("id", 0));
+		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
+		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
+	}	
 	private void inicializaComponentes(){
 		this.lista_avaliacao = (ListView) findViewById(R.id.lista_minhas_avaliacoes);
 		this.usuario = new Usuario();
-//		SharedPreferences sharedPr = getSharedPreferences(Sessao.NOME_PREF, MODE_APPEND);
-//		usuario.setId(sharedPr.getInt("id", 0));
-////	usuario.setLogin(sharedPr.getString("login", "não login"));
-		Intent irTelaPrincipal = getIntent();
-		Bundle bundle = getIntent().getExtras();
-//		bundle.putSerializable("usuario", usuario);
-		irTelaPrincipal.putExtras(bundle);
-		usuario =  (Usuario)bundle.getSerializable("usuario");
-		
-	
-		
-//		sessao.getIdUsuario();
 		
 		
 		listaDeAvaliacao = avaliacaoDAO.buscarAvaliacaoPorUsuario(usuario.getId());

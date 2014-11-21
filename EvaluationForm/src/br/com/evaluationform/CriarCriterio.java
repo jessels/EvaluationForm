@@ -66,9 +66,6 @@ public class CriarCriterio extends Activity {
 		this.edDesc = (EditText) findViewById(R.id.ed_desc);
 		this.edPeso = (EditText) findViewById(R.id.ed_peso);
 		this.listCrit = (ListView) findViewById(R.id.list_crit);
-//		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
-//		this.usuario.setId(preferencia.getInt("id", 0));
-//		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 		this.criterioDAO = new CriterioDAO();
 		atualizaAdapter();
 

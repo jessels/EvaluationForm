@@ -57,6 +57,7 @@ public class CriarAvaliacaoNext extends Activity{
 			StrictMode.setThreadPolicy(policy);
 		}
 		this.inicializaComponentes();
+		this.recuperaPreferencia();
 		
 		editData.setOnClickListener(new OnClickListener() {
 			
@@ -146,20 +147,23 @@ public class CriarAvaliacaoNext extends Activity{
 			}
 		});
 	}
+	private void recuperaPreferencia(){
+		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario = new Usuario();
+		this.usuario.setId(spPreferencias.getInt("id", 0));
+		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
+		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
+	}	
 	private void inicializaComponentes(){
 		this.spAvaliador = (Spinner) findViewById(R.id.spinner_de_avaliadores);
 		this.listAvaliador = (ListView) findViewById(R.id.lista_avaliadores);
 		this.btSalva = (Button) findViewById(R.id.bt_avaliacao_next_salva);
-//		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
-//		this.usuario.setId(preferencia.getInt("id", 0));
-//		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 		this.avaliacaoDAO = new AvaliacaoDAO();
 		this.avaliadorDAO = new UsuarioDAO();
 		this.avaliador = new String();
 		this.btMais = (Button) findViewById(R.id.bt_avaliacao_next_mais);
 		this.editData = (EditText) findViewById(R.id.editData);
-		Bundle bundle = getIntent().getExtras();
-		usuario =  (Usuario)bundle.getSerializable("usuario");
+		
 		
 		listaAvaliador = avaliadorDAO.buscarTodosUsuarios();
 		if(listaAvaliador != null){

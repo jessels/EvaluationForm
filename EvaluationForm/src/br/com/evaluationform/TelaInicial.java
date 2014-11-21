@@ -13,7 +13,7 @@ public class TelaInicial extends Activity{
 		setContentView(R.layout.tela_inicial);
 		
 		
-		final int TEMPO_ENTRADA = 5000;
+		final int TEMPO_ENTRADA = 3000;
 		final Sessao sessao = new Sessao(getApplicationContext());
 		
 		new Handler().postDelayed(new Runnable() {

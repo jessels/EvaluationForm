@@ -41,6 +41,7 @@ public class Sessao {
 			Intent voltaTelaLogin = new Intent(context, TelaLogin.class);
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("usuario", usuario);
+		
 			
 			voltaTelaLogin.putExtras(bundle);
 			voltaTelaLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

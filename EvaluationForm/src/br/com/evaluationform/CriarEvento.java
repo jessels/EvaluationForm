@@ -70,8 +70,5 @@ public class CriarEvento extends Activity{
 		this.endereco = (EditText) findViewById(R.id.ed_end);
 		this.btCria = (Button) findViewById(R.id.bt_cria);
 		this.btGo = (Button) findViewById(R.id.bt_go);
-//		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
-//		this.usuario.setId(preferencia.getInt("id", 0));
-//		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 	}
 }

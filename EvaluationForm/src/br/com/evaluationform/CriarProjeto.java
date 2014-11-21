@@ -76,9 +76,6 @@ public class CriarProjeto extends Activity {
 		this.btVolta = (Button) findViewById(R.id.bt_projeto_voltar);
 		this.projetoDAO = new ProjetoDAO();
 		this.eventoDAO = new EventoDAO();
-//		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
-//		this.usuario.setId(preferencia.getInt("id", 0));
-//		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 		
 		ArrayList<Evento> listaEventos = eventoDAO.buscarTodosEventos();
 		if (listaEventos != null) {
