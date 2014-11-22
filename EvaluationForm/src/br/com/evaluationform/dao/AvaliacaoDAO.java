@@ -1,5 +1,6 @@
 package br.com.evaluationform.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
@@ -13,7 +14,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class AvaliacaoDAO {
 	
-	private static final String URL = "http://192.168.240.43:8080/EvaluationWSv2/services/AvaliacaoDAO?wsdl";
+	private static final String URL = "http://192.168.1.5:8080/EvaluationWSv2/services/AvaliacaoDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirAvaliacao";
@@ -31,6 +32,7 @@ public class AvaliacaoDAO {
 		SoapObject aval = new SoapObject(NAMESPACE, "avaliacao");
 		
 		aval.addProperty("id_avaliacao", avaliacao.getId_avaliacao());
+		aval.addProperty("nome_av", avaliacao.getNome_av());
 		aval.addProperty("data_av", avaliacao.getData_av());
 		aval.addProperty("id_projeto", avaliacao.getId_projeto());
 		aval.addProperty("id_tabela_av", avaliacao.getId_tabela_av());
@@ -68,6 +70,7 @@ public class AvaliacaoDAO {
 		SoapObject aval = new SoapObject(NAMESPACE, "avaliacao");
 		
 		aval.addProperty("id_avaliacao", avaliacao.getId_avaliacao());
+		aval.addProperty("nome_av", avaliacao.getNome_av());
 		aval.addProperty("data_av", avaliacao.getData_av());
 		aval.addProperty("id_projeto", avaliacao.getId_projeto());
 		aval.addProperty("id_tabela_av", avaliacao.getId_tabela_av());
@@ -100,14 +103,9 @@ public class AvaliacaoDAO {
 	public boolean excluirAvaliacao(int id){
 		
 		SoapObject excluirAvaliacao = new SoapObject(NAMESPACE, EXCLUIR);
-		
 		SoapObject usr = new SoapObject(NAMESPACE, "avaliacao");
-		
 		usr.addProperty("id_avaliacao", id);
-		
-		
 		excluirAvaliacao.addSoapObject(usr);
-		
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(excluirAvaliacao);
@@ -124,7 +122,6 @@ public class AvaliacaoDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		
 		}
 	}
 	
@@ -134,32 +131,26 @@ public class AvaliacaoDAO {
 SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 		
 		SoapObject avalia = new SoapObject(NAMESPACE, "avaliacao");
-		
-		
-		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(buscarTodasAvaliacoes);
 		envelope.implicitTypes = true;
 		
 		HttpTransportSE http = new HttpTransportSE(URL);
 		try {
-			http.call("urn" + BUSCAR_TODOS, envelope);
+			http.call("urn:" + BUSCAR_TODOS, envelope);
 			
 			Vector<SoapObject> resposta = (Vector<SoapObject>) envelope.getResponse();
 			
 			for (SoapObject soapObject : resposta) {
-				
 				Avaliacao aval= new Avaliacao();
-				aval.setId_avaliacao(	Integer.parseInt(soapObject.getProperty("id_avaliacao").toString()));
-				aval.setId_projeto(	  Integer.parseInt(soapObject.getProperty("id_projeto").toString()));
-				aval.setId_tabela_av(	Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
-				aval.setId_usuario(	Integer.parseInt(soapObject.getProperty("id_usuario").toString()));
+				aval.setId_avaliacao(Integer.parseInt(soapObject.getProperty("id_avaliacao").toString()));
+				aval.setNome_av(soapObject.getProperty("nome_av").toString());
+				aval.setId_projeto(Integer.parseInt(soapObject.getProperty("id_projeto").toString()));
+				aval.setId_tabela_av(Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
+				aval.setId_usuario(Integer.parseInt(soapObject.getProperty("id_usuario").toString()));
 				aval.setData_av((Date)soapObject.getProperty("data_av"));
-				
 				lista.add(aval);
-				
 			}
-			
 				
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -175,45 +166,59 @@ SoapObject buscarTodasAvaliacoes = new SoapObject(NAMESPACE, BUSCAR_TODOS);
 		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
 		
 		SoapObject buscarAvaliacaoPorUsuario = new SoapObject(NAMESPACE, BUSCAR_USER);
-		
 		SoapObject avalia = new SoapObject(NAMESPACE, "avaliacao");
+		
 		buscarAvaliacaoPorUsuario.addProperty("id_user", id_user);
-		
-		
-		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(buscarAvaliacaoPorUsuario);
 		envelope.implicitTypes = true;
-		
 		HttpTransportSE http = new HttpTransportSE(URL);
+		Vector<SoapObject> resposta;
+		
 		try {
-			http.call("urn" + BUSCAR_USER, envelope);
-			
-			Vector<SoapObject> resposta = (Vector<SoapObject>) envelope.getResponse();
-			
-			for (SoapObject soapObject : resposta) {
-				
+			http.call("urn:" + BUSCAR_USER, envelope);
+			SoapObject teste = (SoapObject) envelope.bodyIn;
+			if(teste.getPropertyCount() == 1){
+				SoapObject soapObject = (SoapObject) envelope.getResponse();
 				Avaliacao aval= new Avaliacao();
 				aval.setId_avaliacao(Integer.parseInt(soapObject.getProperty("id_avaliacao").toString()));
+				aval.setNome_av(soapObject.getProperty("nome_av").toString());
 				aval.setId_projeto(Integer.parseInt(soapObject.getProperty("id_projeto").toString()));
 				aval.setId_tabela_av(Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
 				aval.setId_usuario(Integer.parseInt(soapObject.getProperty("id_usuario").toString()));
-				aval.setData_av((Date)soapObject.getProperty("data_av"));
 				
+				SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+				Date data = formato.parse(soapObject.getProperty("data_av").toString());
+				aval.setData_av(data);
 				lista.add(aval);
-				
+			} else {
+				resposta = (Vector<SoapObject>) envelope.getResponse();
+				if(teste.getPropertyCount() != 0){
+				for (SoapObject soapObject : resposta) {
+					
+					Avaliacao aval= new Avaliacao();
+					
+					aval.setId_avaliacao(Integer.parseInt(soapObject.getProperty("id_avaliacao").toString()));
+					aval.setNome_av(soapObject.getProperty("nome_av").toString());
+					aval.setId_projeto(Integer.parseInt(soapObject.getProperty("id_projeto").toString()));
+					aval.setId_tabela_av(Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
+					aval.setId_usuario(Integer.parseInt(soapObject.getProperty("id_usuario").toString()));
+					SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+					Date data = formato.parse(soapObject.getProperty("data_av").toString());
+					aval.setData_av(data);
+					lista.add(aval);
 			}
-			
-				
+		} else {
+			return null;
+		}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-		
 		}
-		
-		
 		return lista;
 	}
+	
 	public Avaliacao buscarAvaliacaoPorId(int id){
 		Avaliacao aval = null;
 		

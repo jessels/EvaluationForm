@@ -29,7 +29,6 @@ public class CriarAvaliacao extends Activity {
 	private Spinner spTabela;
 	private ProjetoDAO projetoDAO;
 	private TabelaAvaliativaDAO tabelaDAO;
-	private TabelaAvaliativa tabela;
 	private ArrayList<Projeto> listaProjeto;
 	private ArrayAdapter<Projeto> adapterProjeto;
 	private ArrayList<TabelaAvaliativa> listaTabela;
@@ -53,17 +52,6 @@ public class CriarAvaliacao extends Activity {
 		this.recuperaPreferencia();	
 		
 		
-//		listaProjeto = projetoDAO.buscarTodosProjetos();
-//		if (listaProjeto != null) {
-//			adapterProjeto = new ArrayAdapter<Projeto>(
-//					CriarAvaliacao.this,
-//					android.R.layout.simple_spinner_item,
-//					listaProjeto);
-//
-//			spProjeto.setAdapter(adapterProjeto);
-		
-				
-			
 			
 			spProjeto.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -72,9 +60,6 @@ public class CriarAvaliacao extends Activity {
 						int position, long id) {
 					projetoSelecionado = (Projeto)spProjeto.getAdapter().getItem(position);
 					Log.i("DEBUG", "ID PROJETO: "+projetoSelecionado.getId_projeto());
-//					Intent irTelaNext = new Intent(getApplicationContext(), CriarAvaliacaoNext.class);
-//					Bundle selecProj = new Bundle();
-//					selecProj.putInt("id_projeto", projeto.getId_projeto());
 					
 					
 				}
@@ -91,11 +76,6 @@ public class CriarAvaliacao extends Activity {
 				public void onItemSelected(AdapterView<?> parent,
 						View view, int position, long id) {
 					tabelaSelecionado = (TabelaAvaliativa)spTabela.getAdapter().getItem(position);
-//					Intent irTelaNext = new Intent(getApplicationContext(), CriarAvaliacaoNext.class);
-//					Bundle selecTabela = new Bundle();
-//					selecTabela.putInt("id_tabela", tabela.getId_tabela_av());
-//					irTelaNext.putExtras(selecTabela);
-//					startActivity(irTelaNext);
 				}
 
 				@Override
@@ -112,6 +92,7 @@ public class CriarAvaliacao extends Activity {
 						Intent irTelaNext = new Intent (getApplicationContext(), CriarAvaliacaoNext.class);
 						Log.i("DEBUG", "id "+projetoSelecionado.getId_projeto());
 						irTelaNext.putExtra("id_projeto", projetoSelecionado.getId_projeto());
+						irTelaNext.putExtra("nome_av", projetoSelecionado.getNome());
 						irTelaNext.putExtra("id_tabela", tabelaSelecionado.getId_tabela_av());
 						startActivity(irTelaNext);
 					}else{
@@ -126,17 +107,6 @@ public class CriarAvaliacao extends Activity {
 				}
 			});
 
-		//}
-		
-		
-//			listaTabela = tabelaDAO.buscarTodasTabelas();
-//				if(listaTabela != null){
-//					adapterTabela = new ArrayAdapter<TabelaAvaliativa>
-//					(CriarAvaliacao.this, 
-//					android.R.layout.simple_list_item_1, 
-//					listaTabela);
-//					
-//					spTabela.setAdapter(adapterTabela);
 				
 					
 		}
@@ -157,10 +127,7 @@ public class CriarAvaliacao extends Activity {
 		this.spTabela = (Spinner) findViewById(R.id.spinner_tabela);
 		this.projetoDAO = new ProjetoDAO();
 		this.tabelaDAO = new TabelaAvaliativaDAO();
-		this.tabela = new TabelaAvaliativa();
-		Bundle bundle = getIntent().getExtras();
-		usuario =  (Usuario)bundle.getSerializable("usuario");
-		
+				
 		
 		listaProjeto = projetoDAO.buscarTodosProjetos();
 		if (listaProjeto != null) {

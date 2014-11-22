@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import br.com.evaluationform.CriarEvento;
 import br.com.evaluationform.R;
+import br.com.evaluationform.TelaLogin;
 import br.com.evaluationform.dao.Evento;
 import br.com.evaluationform.dao.EventoDAO;
 import br.com.evaluationform.dao.Usuario;
@@ -44,6 +46,7 @@ public class MenuEvento extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		this.inicializaComponentes();
+		this.recuperaPreferencia();
 
 		listaMostraEvento.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -68,14 +71,19 @@ public class MenuEvento extends Activity {
 		});
 
 	}
+	private void recuperaPreferencia(){
+		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario = new Usuario();
+		this.usuario.setId(spPreferencias.getInt("id", 0));
+		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
+		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
+	}
+	
 
 	private void inicializaComponentes() {
 		this.criaEvento = (Button) findViewById(R.id.bt_evento_criar);
 		this.listaMostraEvento = (ListView) findViewById(R.id.lista_menu_evento);
 		this.eventoDAO = new EventoDAO();
-//		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
-//		this.usuario.setId(preferencia.getInt("id", 0));
-//		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 		
 		listaEventos = eventoDAO.buscarTodosEventos();
 		if (listaEventos != null) {

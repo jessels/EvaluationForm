@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,9 +29,6 @@ public class MinhasAvaliacoes extends Activity{
 	private Avaliacao avaliacaoSelecionada;
 	private Avaliacao avaliacao;
 	
-	Sessao sessao;
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,8 +39,10 @@ public class MinhasAvaliacoes extends Activity{
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
+		
+		recuperaPreferencia();
 		this.inicializaComponentes();
-		this.recuperaPreferencia();
+		
 		
 		lista_avaliacao.setOnItemClickListener(new OnItemClickListener() {
 
@@ -86,16 +86,16 @@ public class MinhasAvaliacoes extends Activity{
 		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
 		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
 	}	
+	
 	private void inicializaComponentes(){
 		this.lista_avaliacao = (ListView) findViewById(R.id.lista_minhas_avaliacoes);
-		this.usuario = new Usuario();
+		this.avaliacaoDAO = new AvaliacaoDAO();
+		Log.d("lista", this.usuario.getId() + "");
+		this.listaDeAvaliacao = avaliacaoDAO.buscarAvaliacaoPorUsuario(this.usuario.getId());
 		
-		
-		listaDeAvaliacao = avaliacaoDAO.buscarAvaliacaoPorUsuario(usuario.getId());
-			if(listaDeAvaliacao != null){
-				adapterAvaliacao = new ArrayAdapter<Avaliacao>(MinhasAvaliacoes.this, 
-						android.R.layout.simple_list_item_1, listaDeAvaliacao);
-			lista_avaliacao.setAdapter(adapterAvaliacao);
+			if(this.listaDeAvaliacao != null){
+				this.adapterAvaliacao = new ArrayAdapter<Avaliacao>(this,android.R.layout.simple_list_item_1, listaDeAvaliacao);
+				this.lista_avaliacao.setAdapter(adapterAvaliacao);
 		}
 		
 		

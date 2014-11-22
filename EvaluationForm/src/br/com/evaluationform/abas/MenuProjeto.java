@@ -26,7 +26,6 @@ public class MenuProjeto extends Activity{
 	private ProjetoDAO projetoDAO;
 	private Usuario usuario;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,6 +37,7 @@ public class MenuProjeto extends Activity{
 			StrictMode.setThreadPolicy(policy);
 		}
 		this.inicializaComponentes();
+		this.recuperaPreferencia();
 		
 		ArrayList<Projeto> listaProjeto = projetoDAO.buscarTodosProjetos();
 			if(listaProjeto != null){
@@ -59,13 +59,18 @@ public class MenuProjeto extends Activity{
 			}
 		});
 	}
+	private void recuperaPreferencia(){
+		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario = new Usuario();
+		this.usuario.setId(spPreferencias.getInt("id", 0));
+		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
+		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
+	}
+	
 	
 	private void inicializaComponentes(){
 		this.criaProjeto = (Button) findViewById(R.id.bt_menu_projeto_criar);
 		this.listProjeto = (ListView) findViewById(R.id.lista_menu_projeto);
-//		SharedPreferences preferencia = getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
-//		this.usuario.setId(preferencia.getInt("id", 0));
-//		this.usuario.setLogin(preferencia.getString("login", "login falso"));
 		this.projetoDAO = new ProjetoDAO();
 	}
 

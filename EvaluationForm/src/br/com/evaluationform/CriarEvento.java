@@ -36,6 +36,7 @@ public class CriarEvento extends Activity{
 			StrictMode.setThreadPolicy(policy);
 		}
 		this.inicializaComponentes();
+		this.recuperaPreferencia();
 		
 		btCria.setOnClickListener(new OnClickListener() {
 			
@@ -63,6 +64,13 @@ public class CriarEvento extends Activity{
 				finish();
 			}
 		});
+	}
+	private void recuperaPreferencia(){
+		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario = new Usuario();
+		this.usuario.setId(spPreferencias.getInt("id", 0));
+		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
+		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
 	}
 	private void inicializaComponentes(){
 		this.nomeEvento = (EditText) findViewById(R.id.ed_nome_pj);

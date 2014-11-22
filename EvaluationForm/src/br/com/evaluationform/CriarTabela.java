@@ -1,5 +1,7 @@
 package br.com.evaluationform;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,6 +27,8 @@ public class CriarTabela extends Activity {
 	private TabelaAvaliativaDAO tabelaDAO;
 	private TabelaAvaliativa tabela;
 	private Usuario usuario;
+	private ArrayList<TabelaAvaliativa> listaDeTabela;
+	private ArrayAdapter<TabelaAvaliativa> adapterTabela;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,7 @@ public class CriarTabela extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		this.inicializaComponentes();
+		this.recuperaPreferencia();
 
 
 		cria.setOnClickListener(new OnClickListener() {
@@ -66,6 +72,13 @@ public class CriarTabela extends Activity {
 			}
 		});
 	}
+	private void recuperaPreferencia(){
+		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
+		this.usuario = new Usuario();
+		this.usuario.setId(spPreferencias.getInt("id", 0));
+		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
+		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
+	}
 
 	private void inicializaComponentes() {
 		this.nomeTabela = (EditText) findViewById(R.id.edNomeTabela);
@@ -73,6 +86,13 @@ public class CriarTabela extends Activity {
 		this.volta = (Button) findViewById(R.id.bt_menu_tabela_voltar);
 		this.tabelaDAO = new TabelaAvaliativaDAO();
 		this.listaTabela = (ListView) findViewById(R.id.lista_menu_tabela);
+		
+		listaDeTabela = tabelaDAO.buscarTodasTabelas();
+		if(listaDeTabela != null){
+			adapterTabela = new ArrayAdapter<TabelaAvaliativa>(CriarTabela.this, 
+				android.R.layout.simple_list_item_1, listaDeTabela);
+		listaTabela.setAdapter(adapterTabela);
+		}
 
 	}
 

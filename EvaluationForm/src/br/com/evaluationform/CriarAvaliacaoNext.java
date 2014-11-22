@@ -107,7 +107,9 @@ public class CriarAvaliacaoNext extends Activity{
 		Intent it = getIntent();
 		final Integer id_tabela = getIntent().getIntExtra("id_tabela", 0);
 		final Integer id_projeto = getIntent().getIntExtra("id_projeto", 0);
+		final String nome_av = getIntent().getStringExtra("nome_av");
 		Log.i("DEBUG", ""+id_projeto);
+		Log.i("NOME", "" + nome_av);
 		btMais.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -141,7 +143,7 @@ public class CriarAvaliacaoNext extends Activity{
 			
 				for(i=0; i<listaAvaliador2.size(); i++){
 					Log.i("DEBUG", "ID USER "+listaAvaliador2.get(i).getId());
-					Avaliacao a = new Avaliacao(0, listaAvaliador2.get(i).getId(), id_projeto, id_tabela, dateFormatada);
+					Avaliacao a = new Avaliacao(0, listaAvaliador2.get(i).getId(),nome_av, id_projeto, id_tabela,dateFormatada);
 					avaliacaoDAO.inserirAvaliacao(a);
 				}
 			}

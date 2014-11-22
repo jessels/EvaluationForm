@@ -7,6 +7,7 @@ import java.util.Date;
 		
 		private static final long serialVersionUID = -278104483980801542L;
 		private int id_avaliacao;
+		private String nome_av;
 		private int id_usuario;
 		private int id_projeto;
 		private int id_tabela_av;
@@ -16,9 +17,10 @@ import java.util.Date;
 		public Avaliacao(){
 			
 		}
-		public Avaliacao(int id_avaliacao, int id_usuario, int id_projeto, int id_tabela_av,
+		public Avaliacao(int id_avaliacao, int id_usuario, String nome_av, int id_projeto, int id_tabela_av,
 				Date data_av) {
 			this.id_avaliacao = id_avaliacao;
+			this.nome_av = nome_av;
 			this.id_usuario = id_usuario;
 			this.id_projeto = id_projeto;
 			this.id_tabela_av = id_tabela_av;
@@ -48,12 +50,22 @@ import java.util.Date;
 		public void setId_tabela_av(int id_tabela_av) {
 			this.id_tabela_av = id_tabela_av;
 		}
-		
 		public Date getData_av() {
 			return data_av;
 		}
 		public void setData_av(Date data_av) {
 			this.data_av = data_av;
 		}
+		public String getNome_av() {
+			return nome_av;
+		}
+		public void setNome_av(String nome_av) {
+			this.nome_av = nome_av;
+		}
+		@Override
+		public String toString() {
+			return this.nome_av;
+		}
+		
 	
 	}
