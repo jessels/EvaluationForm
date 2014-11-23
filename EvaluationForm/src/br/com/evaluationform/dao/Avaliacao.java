@@ -17,7 +17,7 @@ import java.util.Date;
 		public Avaliacao(){
 			
 		}
-		public Avaliacao(int id_avaliacao, int id_usuario, String nome_av, int id_projeto, int id_tabela_av,
+		public Avaliacao(int id_avaliacao, String nome_av, int id_usuario,  int id_projeto, int id_tabela_av,
 				Date data_av) {
 			this.id_avaliacao = id_avaliacao;
 			this.nome_av = nome_av;

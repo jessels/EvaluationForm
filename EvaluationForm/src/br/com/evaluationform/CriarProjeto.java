@@ -42,6 +42,7 @@ public class CriarProjeto extends Activity {
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
+		
 		this.inicializaComponentes();
 		this.recuperaPreferencia();
 

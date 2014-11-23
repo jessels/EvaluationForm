@@ -50,18 +50,19 @@ public class MinhasAvaliacoes extends Activity{
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				int itemPosition = position;
-				if(lista_avaliacao.getSelectedItem() != null){
+				avaliacaoSelecionada = (Avaliacao) lista_avaliacao.getItemAtPosition(itemPosition);
 					AlertDialog.Builder dialogo = new AlertDialog.Builder(MinhasAvaliacoes.this);
 					dialogo.setTitle("Avaliação");
-					dialogo.setMessage("Deseja avaliar "+ lista_avaliacao.getSelectedItem().toString());
+					dialogo.setMessage("Deseja avaliar ");
 					dialogo.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 						
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
-//							Intent irTelaAvaliacao = new Intent(getApplicationContext(), TelaNota.class);
-//							startActivity(irTelaAvaliacao);
-//							dialog.cancel();
+							Intent irTelaAvaliacao = new Intent(getApplicationContext(), Nota.class);
+							startActivity(irTelaAvaliacao);
+							finish();
+							dialog.cancel();
 						}
 					});
 					dialogo.setNeutralButton("Não", new DialogInterface.OnClickListener() {
@@ -71,12 +72,14 @@ public class MinhasAvaliacoes extends Activity{
 							// TODO Auto-generated method stub
 							Intent cancelaDialogo = new Intent(getApplicationContext(), MinhasAvaliacoes.class);
 							startActivity(cancelaDialogo);
+							finish();
 						}
 					});
+					dialogo.create();
 					dialogo.show();
 				}
-//				avaliacaoSelecionada = (Avaliacao) lista_avaliacao.getItemAtPosition(position);
-			}
+				
+			
 		});
 	}
 	private void recuperaPreferencia(){
@@ -91,11 +94,12 @@ public class MinhasAvaliacoes extends Activity{
 		this.lista_avaliacao = (ListView) findViewById(R.id.lista_minhas_avaliacoes);
 		this.avaliacaoDAO = new AvaliacaoDAO();
 		Log.d("lista", this.usuario.getId() + "");
-		this.listaDeAvaliacao = avaliacaoDAO.buscarAvaliacaoPorUsuario(this.usuario.getId());
 		
-			if(this.listaDeAvaliacao != null){
-				this.adapterAvaliacao = new ArrayAdapter<Avaliacao>(this,android.R.layout.simple_list_item_1, listaDeAvaliacao);
-				this.lista_avaliacao.setAdapter(adapterAvaliacao);
+		listaDeAvaliacao = avaliacaoDAO.buscarAvaliacaoPorUsuario(this.usuario.getId());
+			if(listaDeAvaliacao != null){
+				adapterAvaliacao = new ArrayAdapter<Avaliacao>(this,android.R.layout.simple_list_item_1, listaDeAvaliacao);
+				lista_avaliacao.setAdapter(adapterAvaliacao);
+				
 		}
 		
 		

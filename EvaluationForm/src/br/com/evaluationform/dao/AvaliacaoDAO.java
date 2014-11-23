@@ -33,10 +33,10 @@ public class AvaliacaoDAO {
 		
 		aval.addProperty("id_avaliacao", avaliacao.getId_avaliacao());
 		aval.addProperty("nome_av", avaliacao.getNome_av());
-		aval.addProperty("data_av", avaliacao.getData_av());
+		aval.addProperty("id_avaliador", avaliacao.getId_usuario());
 		aval.addProperty("id_projeto", avaliacao.getId_projeto());
 		aval.addProperty("id_tabela_av", avaliacao.getId_tabela_av());
-		aval.addProperty("id_avaliador", avaliacao.getId_usuario());
+		aval.addProperty("data_av", avaliacao.getData_av());
 		
 		inserirAvaliacao.addSoapObject(aval);
 		

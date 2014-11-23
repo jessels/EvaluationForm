@@ -143,7 +143,7 @@ public class CriarAvaliacaoNext extends Activity{
 			
 				for(i=0; i<listaAvaliador2.size(); i++){
 					Log.i("DEBUG", "ID USER "+listaAvaliador2.get(i).getId());
-					Avaliacao a = new Avaliacao(0, listaAvaliador2.get(i).getId(),nome_av, id_projeto, id_tabela,dateFormatada);
+					Avaliacao a = new Avaliacao(0, nome_av, listaAvaliador2.get(i).getId(), id_projeto, id_tabela,dateFormatada);
 					avaliacaoDAO.inserirAvaliacao(a);
 				}
 			}
