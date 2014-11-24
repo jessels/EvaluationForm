@@ -39,6 +39,7 @@
         <activity android:name="CriarAvaliacaoNext"></activity>
         <activity android:name="MinhasAvaliacoes"></activity>
         <activity android:name="Nota"></activity>
+        <activity android:name="Configuracao"></activity>
     </application>
 
 </manifest>

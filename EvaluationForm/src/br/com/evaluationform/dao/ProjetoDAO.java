@@ -106,7 +106,7 @@ public class ProjetoDAO {
 		
 		HttpTransportSE http = new HttpTransportSE(URL);
 		try {
-			http.call("urn" + EXCLUIR, envelope);
+			http.call("urn:" + EXCLUIR, envelope);
 			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			

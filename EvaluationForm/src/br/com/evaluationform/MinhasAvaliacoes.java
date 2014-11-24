@@ -53,7 +53,7 @@ public class MinhasAvaliacoes extends Activity{
 				avaliacaoSelecionada = (Avaliacao) lista_avaliacao.getItemAtPosition(itemPosition);
 					AlertDialog.Builder dialogo = new AlertDialog.Builder(MinhasAvaliacoes.this);
 					dialogo.setTitle("Avaliação");
-					dialogo.setMessage("Deseja avaliar ");
+					dialogo.setMessage("	Deseja avaliar 	");
 					dialogo.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 						
 						@Override
@@ -70,9 +70,7 @@ public class MinhasAvaliacoes extends Activity{
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
-							Intent cancelaDialogo = new Intent(getApplicationContext(), MinhasAvaliacoes.class);
-							startActivity(cancelaDialogo);
-							finish();
+							dialog.cancel();
 						}
 					});
 					dialogo.create();

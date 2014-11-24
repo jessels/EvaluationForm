@@ -66,7 +66,8 @@ public class TelaPrincipal extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-//				Intent irTelaConfig = new Intent(getApplicationContext(),);
+				Intent irTelaConfig = new Intent(getApplicationContext(), Configuracao.class);
+				startActivity(irTelaConfig);
 			}
 		});
 		

@@ -94,7 +94,7 @@ public class EventoDAO {
 		
 		SoapObject usr = new SoapObject(NAMESPACE, "evento");
 		
-		usr.addProperty("id", id);
+		usr.addProperty("id_evento", id);
 		
 		
 		excluirEvento.addSoapObject(usr);
@@ -106,7 +106,7 @@ public class EventoDAO {
 		
 		HttpTransportSE http = new HttpTransportSE(URL);
 		try {
-			http.call("urn" + EXCLUIR, envelope);
+			http.call("urn:" + EXCLUIR, envelope);
 			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			
