@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class EventoDAO {
 	
-	private static final String URL = "http://192.168.1.5:8080/EvaluationWSv2/services/EventoDAO?wsdl";
+	private static final String URL = "http://192.168.241.246:8080/EvaluationWSv2/services/EventoDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirEvento";
@@ -89,33 +89,19 @@ public class EventoDAO {
 	
 	
 	public boolean excluirEvento(int id){
-		
-		SoapObject excluirEvento = new SoapObject(NAMESPACE, EXCLUIR);
-		
-		SoapObject usr = new SoapObject(NAMESPACE, "evento");
-		
-		usr.addProperty("id_evento", id);
-		
-		
-		excluirEvento.addSoapObject(usr);
-		
-		
+		SoapObject excluirEvento = new SoapObject(NAMESPACE, EXCLUIR);	
+		excluirEvento.addProperty("id", id);		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(excluirEvento);
 		envelope.implicitTypes = true;
-		
 		HttpTransportSE http = new HttpTransportSE(URL);
 		try {
 			http.call("urn:" + EXCLUIR, envelope);
-			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
-			
 			return Boolean.parseBoolean(resposta.toString());
-	
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		
 		}
 	}
 	

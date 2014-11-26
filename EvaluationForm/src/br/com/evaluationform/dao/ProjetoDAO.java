@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class ProjetoDAO {
 	
-	private static final String URL = "http://192.168.1.5:8080/EvaluationWSv2/services/ProjetoDAO?wsdl";
+	private static final String URL = "http://192.168.241.246:8080/EvaluationWSv2/services/ProjetoDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirProjeto";
@@ -91,15 +91,7 @@ public class ProjetoDAO {
 	public boolean excluirProjeto(int id){
 		
 		SoapObject excluirProjeto = new SoapObject(NAMESPACE, EXCLUIR);
-		
-		SoapObject proj = new SoapObject(NAMESPACE, "projeto");
-		
-		proj.addProperty("id_projeto", id);
-		
-		
-		excluirProjeto.addSoapObject(proj);
-		
-		
+		excluirProjeto.addProperty("id_projeto", id);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(excluirProjeto);
 		envelope.implicitTypes = true;

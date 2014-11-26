@@ -11,7 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class TabelaAvaliativaDAO {
 	
-	private static final String URL = "http://192.168.1.5:8080/EvaluationWSv2/services/TabelaAvaliativaDAO?wsdl";
+	private static final String URL = "http://192.168.241.246:8080/EvaluationWSv2/services/TabelaAvaliativaDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirTabelaAvaliativa";
@@ -100,15 +100,7 @@ public class TabelaAvaliativaDAO {
 	public boolean excluirTabelaAvaliativa(int id){
 		
 		SoapObject excluirTabelaAvaliativa = new SoapObject(NAMESPACE, EXCLUIR);
-		
-		SoapObject tav = new SoapObject(NAMESPACE, "tabelaAvaliativa");
-		
-		tav.addProperty("id_tabela_av", id);
-		
-		
-		excluirTabelaAvaliativa.addSoapObject(tav);
-		
-		
+		excluirTabelaAvaliativa.addProperty("id_tabela_av", id);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(excluirTabelaAvaliativa);
 		envelope.implicitTypes = true;

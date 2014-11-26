@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tx_configuracao_exibicao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:textSize="30dp"
+        android:text="Configurações" />
+
+    <EditText
+        android:id="@+id/ed_config_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tx_configuracao_exibicao"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="Nome"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+    
+     <EditText
+         android:id="@+id/ed_config_senha"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/ed_config_login"
+         android:layout_marginTop="20dp"
+         android:ems="10"
+         android:hint="Senha"
+         android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/ed_config_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ed_config_nome"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Login"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/ed_config_confsenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ed_config_senha"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Confirmar senha"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/bt_config_alterar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="Alterar" />
+
+</RelativeLayout>

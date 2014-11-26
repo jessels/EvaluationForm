@@ -7,7 +7,7 @@ public class Criterio implements Serializable{
 	
 	private static final long serialVersionUID = 199110351886408214L;
 	private int id_criterio;
-	private int peso;
+	private double peso;
 	private String descricao;
 	private int id_tabela_av;
 	
@@ -15,7 +15,7 @@ public class Criterio implements Serializable{
 	public Criterio(){
 		
 	}
-	public Criterio(int id_criterio, int peso, String descricao, int id_tabela_av) {
+	public Criterio(int id_criterio, double peso, String descricao, int id_tabela_av) {
 		super();
 		this.id_criterio = id_criterio;
 		this.peso = peso;
@@ -28,10 +28,10 @@ public class Criterio implements Serializable{
 	public void setId_criterio(int id_criterio) {
 		this.id_criterio = id_criterio;
 	}
-	public int getPeso() {
+	public double getPeso() {
 		return peso;
 	}
-	public void setPeso(int peso) {
+	public void setPeso(double peso) {
 		this.peso = peso;
 	}
 	

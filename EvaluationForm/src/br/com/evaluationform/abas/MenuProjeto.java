@@ -66,7 +66,7 @@ public class MenuProjeto extends Activity{
 						// TODO Auto-generated method stub
 						Log.i("Teste Pj", "Projeto: " + projetoSelecionado.getId_projeto());
 						if(projetoDAO.excluirProjeto(projetoSelecionado.getId_projeto())){
-							Toast.makeText(getApplicationContext(), "Projeto deletado com sucesso!", Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), "Projeto" + projetoSelecionado.getNome() +"deletado com sucesso!", Toast.LENGTH_LONG).show();
 						}
 						dialog.cancel();
 					}

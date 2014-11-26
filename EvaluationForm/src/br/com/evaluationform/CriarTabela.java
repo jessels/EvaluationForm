@@ -3,12 +3,17 @@ package br.com.evaluationform;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +34,7 @@ public class CriarTabela extends Activity {
 	private Usuario usuario;
 	private ArrayList<TabelaAvaliativa> listaDeTabela;
 	private ArrayAdapter<TabelaAvaliativa> adapterTabela;
+	private TabelaAvaliativa tabelaSelecionado;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,38 @@ public class CriarTabela extends Activity {
 						TelaPrincipal.class);
 				startActivity(voltaMenu);
 				finish();
+			}
+		});
+		listaTabela.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				tabelaSelecionado = (TabelaAvaliativa) listaTabela.getAdapter().getItem(position);
+				AlertDialog.Builder dialogo = new AlertDialog.Builder(CriarTabela.this);
+				dialogo.setTitle("Tabela");
+				dialogo.setMessage("Deseja excluir " + tabelaSelecionado.getNome() + "?");
+				dialogo.setPositiveButton("Sim", new DialogInterface.OnClickListener(){
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						tabelaDAO.excluirTabelaAvaliativa(tabelaSelecionado.getId_tabela_av());
+						dialog.cancel();
+					}
+					
+				});
+				dialogo.setNeutralButton("Não", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						dialog.cancel();
+						
+					}
+				});
+				dialogo.create();
+				dialogo.show();
 			}
 		});
 	}

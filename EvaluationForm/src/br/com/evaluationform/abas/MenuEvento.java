@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 import br.com.evaluationform.CriarEvento;
 import br.com.evaluationform.R;
 import br.com.evaluationform.TelaLogin;
@@ -83,7 +84,11 @@ public class MenuEvento extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						Log.i("Teste ev", "Evento: " + eventoSelecionado.getId_evento());
-						eventoDAO.excluirEvento(eventoSelecionado.getId_evento());
+						if(eventoDAO.excluirEvento(eventoSelecionado.getId_evento())){
+							Toast.makeText(getApplicationContext(), "Evento " + eventoSelecionado.getNome() + "deletado", Toast.LENGTH_LONG).show();
+							Intent atualiza = new Intent(getApplicationContext(), MenuEvento.class);
+							startActivity(atualiza);
+						}
 						dialog.cancel();
 					}
 				});

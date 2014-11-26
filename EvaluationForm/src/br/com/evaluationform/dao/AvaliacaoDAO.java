@@ -14,7 +14,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class AvaliacaoDAO {
 	
-	private static final String URL = "http://192.168.1.5:8080/EvaluationWSv2/services/AvaliacaoDAO?wsdl";
+	private static final String URL = "http://192.168.241.246:8080/EvaluationWSv2/services/AvaliacaoDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirAvaliacao";
@@ -33,7 +33,7 @@ public class AvaliacaoDAO {
 		
 		aval.addProperty("id_avaliacao", avaliacao.getId_avaliacao());
 		aval.addProperty("nome_av", avaliacao.getNome_av());
-		aval.addProperty("id_avaliador", avaliacao.getId_usuario());
+		aval.addProperty("id_usuario", avaliacao.getId_usuario());
 		aval.addProperty("id_projeto", avaliacao.getId_projeto());
 		aval.addProperty("id_tabela_av", avaliacao.getId_tabela_av());
 		aval.addProperty("data_av", avaliacao.getData_av());
@@ -101,7 +101,6 @@ public class AvaliacaoDAO {
 	
 	
 	public boolean excluirAvaliacao(int id){
-		
 		SoapObject excluirAvaliacao = new SoapObject(NAMESPACE, EXCLUIR);
 		SoapObject usr = new SoapObject(NAMESPACE, "avaliacao");
 		usr.addProperty("id_avaliacao", id);
