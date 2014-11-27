@@ -42,9 +42,9 @@ public class CriarProjeto extends Activity {
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		
+		recuperaPreferencia();
 		this.inicializaComponentes();
-		this.recuperaPreferencia();
+		
 
 		btNext.setOnClickListener(new OnClickListener() {
 
@@ -67,7 +67,6 @@ public class CriarProjeto extends Activity {
 				startActivity(irTelaVolta);
 			}
 		});
-
 	}
 	private void recuperaPreferencia(){
 		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
@@ -76,7 +75,6 @@ public class CriarProjeto extends Activity {
 		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
 		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
 	}
-
 	private void inicializaComponentes() {
 		this.nomeProj = (EditText) findViewById(R.id.nome_projeto);
 		this.listaEv = (ListView) findViewById(R.id.listEventos);
@@ -105,8 +103,7 @@ public class CriarProjeto extends Activity {
 					
 				}
 			});
-			
-					}
+		}
 	}
 	private boolean verificaPreenchimento(){
 		boolean preencheu = false;

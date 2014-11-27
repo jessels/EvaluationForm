@@ -27,7 +27,6 @@ public class MinhasAvaliacoes extends Activity{
 	private AvaliacaoDAO avaliacaoDAO;
 	private Usuario usuario;
 	private Avaliacao avaliacaoSelecionada;
-	private Avaliacao avaliacao;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +38,8 @@ public class MinhasAvaliacoes extends Activity{
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		
 		recuperaPreferencia();
 		this.inicializaComponentes();
-		
 		
 		lista_avaliacao.setOnItemClickListener(new OnItemClickListener() {
 
@@ -59,7 +56,9 @@ public class MinhasAvaliacoes extends Activity{
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
-							Intent irTelaAvaliacao = new Intent(getApplicationContext(), Nota.class);
+							Intent irTelaAvaliacao = new Intent(getApplicationContext(), TelaNota.class);
+							irTelaAvaliacao.putExtra("id_avaliacao", avaliacaoSelecionada.getId_avaliacao());
+							irTelaAvaliacao.putExtra("id_tabela_av", avaliacaoSelecionada.getId_tabela_av());
 							startActivity(irTelaAvaliacao);
 							finish();
 							dialog.cancel();
@@ -76,8 +75,6 @@ public class MinhasAvaliacoes extends Activity{
 					dialogo.create();
 					dialogo.show();
 				}
-				
-			
 		});
 	}
 	private void recuperaPreferencia(){
@@ -87,7 +84,6 @@ public class MinhasAvaliacoes extends Activity{
 		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
 		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
 	}	
-	
 	private void inicializaComponentes(){
 		this.lista_avaliacao = (ListView) findViewById(R.id.lista_minhas_avaliacoes);
 		this.avaliacaoDAO = new AvaliacaoDAO();
@@ -97,12 +93,6 @@ public class MinhasAvaliacoes extends Activity{
 			if(listaDeAvaliacao != null){
 				adapterAvaliacao = new ArrayAdapter<Avaliacao>(this,android.R.layout.simple_list_item_1, listaDeAvaliacao);
 				lista_avaliacao.setAdapter(adapterAvaliacao);
-				
 		}
-		
-		
 	}
-	
-	
-
 }

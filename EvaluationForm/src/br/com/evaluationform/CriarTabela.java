@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -64,7 +63,6 @@ public class CriarTabela extends Activity {
 					irTelaCriaCriterio.putExtras(informa);
 					startActivity(irTelaCriaCriterio);
 				}
-				
 			}
 		});
 		volta.setOnClickListener(new OnClickListener() {
@@ -94,7 +92,6 @@ public class CriarTabela extends Activity {
 						tabelaDAO.excluirTabelaAvaliativa(tabelaSelecionado.getId_tabela_av());
 						dialog.cancel();
 					}
-					
 				});
 				dialogo.setNeutralButton("Não", new DialogInterface.OnClickListener() {
 					
@@ -117,7 +114,6 @@ public class CriarTabela extends Activity {
 		this.usuario.setLogin(spPreferencias.getString("usuario", "0"));
 		this.usuario.setLogin(spPreferencias.getString("senha", "0"));
 	}
-
 	private void inicializaComponentes() {
 		this.nomeTabela = (EditText) findViewById(R.id.edNomeTabela);
 		this.cria = (Button) findViewById(R.id.bt_menu_tabela_criar);
@@ -131,7 +127,5 @@ public class CriarTabela extends Activity {
 				android.R.layout.simple_list_item_1, listaDeTabela);
 		listaTabela.setAdapter(adapterTabela);
 		}
-
 	}
-
 }

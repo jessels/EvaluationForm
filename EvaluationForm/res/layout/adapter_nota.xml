@@ -30,7 +30,7 @@
         android:layout_marginLeft="30dp"
         android:ems="10"
         android:hint="Aluno1"
-        android:inputType="number" >
+        android:inputType="numberDecimal" >
 
         <requestFocus />
     </EditText>

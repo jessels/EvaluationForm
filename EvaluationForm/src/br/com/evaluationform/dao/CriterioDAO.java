@@ -12,7 +12,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class CriterioDAO {
 	
-	private static final String URL = "http://192.168.241.246:8080/EvaluationWSv2/services/CriterioDAO?wsdl";
+	private static final String URL = "http://192.168.241.140:8080/EvaluationWSv2/services/CriterioDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirCriterio";
@@ -144,6 +144,7 @@ public class CriterioDAO {
 			crit.setPeso(Double.parseDouble(soapObject.getProperty("peso").toString()));
 			crit.setDescricao(soapObject.getProperty("descricao").toString());
 			crit.setId_tabela_av(Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
+			crit.setNota(new Nota(0, 0, 0, crit.getId_criterio(), 0, 0));
 			lista.add(crit);
 			}else {
 				resposta = (Vector<SoapObject>) envelope.getResponse();
@@ -154,6 +155,9 @@ public class CriterioDAO {
 					crit.setPeso(Double.parseDouble(soapObject.getProperty("peso").toString()));
 					crit.setDescricao(soapObject.getProperty("descricao").toString());
 					crit.setId_tabela_av(Integer.parseInt(soapObject.getProperty("id_tabela_av").toString()));
+					
+					crit.setNota(new Nota(0, 0, 0, crit.getId_criterio(), 0, 0));
+					
 					lista.add(crit);
 				}
 				

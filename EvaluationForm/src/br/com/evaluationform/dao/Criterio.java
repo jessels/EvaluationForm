@@ -10,10 +10,19 @@ public class Criterio implements Serializable{
 	private double peso;
 	private String descricao;
 	private int id_tabela_av;
+	private Nota nota;
 	
 	
 	public Criterio(){
 		
+	}
+	public Criterio(int id_criterio, double peso, String descricao, int id_tabela_av, Nota nota) {
+		super();
+		this.id_criterio = id_criterio;
+		this.peso = peso;
+		this.descricao = descricao;
+		this.id_tabela_av = id_tabela_av;
+		this.nota = nota;
 	}
 	public Criterio(int id_criterio, double peso, String descricao, int id_tabela_av) {
 		super();
@@ -22,6 +31,7 @@ public class Criterio implements Serializable{
 		this.descricao = descricao;
 		this.id_tabela_av = id_tabela_av;
 	}
+	
 	public int getId_criterio() {
 		return id_criterio;
 	}
@@ -47,9 +57,23 @@ public class Criterio implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	public Nota getNota() {
+		return nota;
+	}
+	public void setNota(Nota nota) {
+		this.nota = nota;
+	}
+//	@Override
+//	public String toString() {
+//		return this.descricao;
+//	}
 	@Override
 	public String toString() {
-		return this.descricao;
+		return "Criterio [id_criterio=" + id_criterio + ", peso=" + peso
+				+ ", descricao=" + descricao + ", id_tabela_av=" + id_tabela_av
+				+ ", nota=" + nota + "]";
 	}
+	
+	
 
 }

@@ -3,14 +3,16 @@ package br.com.evaluationform;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import br.com.evaluationform.adapter.AdapterCriterio;
-import br.com.evaluationform.dao.Avaliacao;
 import br.com.evaluationform.dao.Criterio;
 import br.com.evaluationform.dao.CriterioDAO;
 import br.com.evaluationform.dao.Nota;
@@ -24,29 +26,49 @@ public class TelaNota extends Activity{
 	private CriterioDAO criterioDAO;
 	private NotaDAO notaDAO;
 	private Usuario usuario;
-	private Avaliacao avaliacao;
-	private Criterio criterio;
-	private AdapterCriterio adapter;
+	private AdapterCriterio adapCriterio;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nota_avaliacao);
-	
+		
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+					.permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
 		recuperaPreferencia();
 		this.inicializaComponentes();
+	
+		Intent it = getIntent();
+		final Integer id_avaliacao = getIntent().getIntExtra("id_avaliacao", 0);
+		final Integer id_tabela_av = getIntent().getIntExtra("id_tabela_av", 0);
+		Log.i("TESTE", "id da tabela " + id_tabela_av);
+		Log.i("TESTE", "id da avaliacao " + id_avaliacao);
+		List<Criterio> crit = criterioDAO.buscarCriterioPorTab(id_tabela_av);
+		adapCriterio = new AdapterCriterio(this, crit);
 		
+		listaCriterio.setAdapter(adapCriterio);
 		
 		btAvalia.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				
-				Nota nota = new Nota(0, nota_aluno1, nota_aluno2, criterio.getId_criterio(), usuario.getId(), avaliacao.getId_avaliacao());
-				notaDAO.inserirNota(nota);
+				List<Criterio> criterios = adapCriterio.getList();
+				
+				for (Criterio criterio : criterios) {
+					Nota nota = criterio.getNota();
+					
+					nota.setId_avaliacao(id_avaliacao);
+					nota.setId_user(usuario.getId());
+					notaDAO.inserirNota(nota);
+					
+					Log.i("criterinho da amizad", criterio.toString());
+				}
 			}
 		});
-
 	}
 	private void recuperaPreferencia(){
 		SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(TelaLogin.NOME_PREFERENCIA, MODE_APPEND);
@@ -60,13 +82,6 @@ public class TelaNota extends Activity{
 		this.btAvalia = (Button) findViewById(R.id.bt_nota_avaliar);
 		this.criterioDAO = new CriterioDAO();
 		this.notaDAO = new NotaDAO();
-		this.criterio = new Criterio();
 		
-		List<Criterio> crit = criterioDAO.buscarCriterioPorTab(19);
-		AdapterCriterio adapCriterio = new AdapterCriterio(this, crit);
-		
-		listaCriterio.setAdapter(adapCriterio);
 	}
-	
-
 }

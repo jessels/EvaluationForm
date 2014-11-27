@@ -9,9 +9,11 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import br.com.evaluationform.adapter.MarshalDouble;
+
 public class NotaDAO {
 	
-	private static final String URL = "http://192.168.241.246:8080/EvaluationWSv2/services/ProjetoDAO?wsdl";
+	private static final String URL = "http://192.168.241.140:8080/EvaluationWSv2/services/NotaDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirNota";
@@ -23,42 +25,37 @@ public class NotaDAO {
 public boolean inserirNota(Nota nota){
 		
 		SoapObject inserirNota = new SoapObject(NAMESPACE, INSERIR);
-		
 		SoapObject not = new SoapObject(NAMESPACE, "nota");
 		
 		not.addProperty("id_nota", nota.getId_nota());
+		not.addProperty("id_user", nota.getId_user());
+		not.addProperty("id_avaliacao", nota.getId_avaliacao());
 		not.addProperty("nota_aluno1", nota.getNota_aluno1());
 		not.addProperty("nota_aluno2", nota.getNota_aluno2());
-		not.addProperty("id_user", nota.getId_user());
 		not.addProperty("id_criterio", nota.getId_criterio());
-		not.addProperty("id_avaliacao", nota.getId_avaliacao());
 		
 		inserirNota.addSoapObject(not);
-		
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(inserirNota);
 		envelope.implicitTypes = true;
+		MarshalDouble md = new MarshalDouble();
+		md.register(envelope);
 		
 		HttpTransportSE http = new HttpTransportSE(URL);
 		try {
 			http.call("urn" + INSERIR, envelope);
-			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
-			
 			return Boolean.parseBoolean(resposta.toString());
 	
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		
 		}
-		
 	}
 	public boolean atualizarNota(Nota nota){
 	
 	SoapObject atualizarNota = new SoapObject(NAMESPACE, ATUALIZAR);
-	
 	SoapObject not = new SoapObject(NAMESPACE, "nota");
 	
 	not.addProperty("id_nota", nota.getId_nota());
@@ -78,15 +75,12 @@ public boolean inserirNota(Nota nota){
 	HttpTransportSE http = new HttpTransportSE(URL);
 	try {
 		http.call("urn" + ATUALIZAR, envelope);
-		
 		SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
-		
 		return Boolean.parseBoolean(resposta.toString());
 
 	} catch (Exception e) {
 		e.printStackTrace();
 		return false;
-	
 	}
 }
 	public boolean excluirNota(int id){
@@ -133,7 +127,6 @@ public boolean inserirNota(Nota nota){
 				not.setId_avaliacao(Integer.parseInt(soapObject.getProperty("id_avaliacao").toString()));
 				lista.add(not);
 			}
-				
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -167,10 +160,6 @@ public boolean inserirNota(Nota nota){
 			return null;
 		
 		}
-		
 		return not;
-		
-		
 	}
-
 }

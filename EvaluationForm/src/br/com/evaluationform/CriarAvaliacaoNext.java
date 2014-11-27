@@ -37,11 +37,9 @@ public class CriarAvaliacaoNext extends Activity{
 	private Button btMais;
 	private AvaliacaoDAO avaliacaoDAO;
 	private UsuarioDAO avaliadorDAO;
-	private String avaliador;
 	private int id_click;
 	private ArrayList<Usuario> listaAvaliador;
 	private ArrayAdapter<Usuario> adapterAvaliador;
-	private int avaliadorId;
 	public EditText editData;
 	private int ano, mes, dia;
 	private int i;
@@ -80,7 +78,6 @@ public class CriarAvaliacaoNext extends Activity{
 				dataPicker.show();
 			}
 		});
-		
 		final ArrayList<Usuario> listaAvaliador2 = new ArrayList<Usuario>();
 			
 		final ArrayAdapter<Usuario> adapterAvaliador2 = new ArrayAdapter<Usuario>(CriarAvaliacaoNext.this, 
@@ -96,13 +93,11 @@ public class CriarAvaliacaoNext extends Activity{
 //				avaliadorId = listaAvaliador.get(position).getId();
 				listaAvaliador2.add(listaAvaliador.get(position));
 			}
-
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 				
 			}
 		});
-		
 		
 		Intent it = getIntent();
 		final Integer id_tabela = getIntent().getIntExtra("id_tabela", 0);
@@ -162,7 +157,6 @@ public class CriarAvaliacaoNext extends Activity{
 		this.btSalva = (Button) findViewById(R.id.bt_avaliacao_next_salva);
 		this.avaliacaoDAO = new AvaliacaoDAO();
 		this.avaliadorDAO = new UsuarioDAO();
-		this.avaliador = new String();
 		this.btMais = (Button) findViewById(R.id.bt_avaliacao_next_mais);
 		this.editData = (EditText) findViewById(R.id.editData);
 		
@@ -176,12 +170,5 @@ public class CriarAvaliacaoNext extends Activity{
 			
 			spAvaliador.setAdapter(adapterAvaliador);
 		}
-		
-		
-			
 	}
-	
-		
-	
-
 }
