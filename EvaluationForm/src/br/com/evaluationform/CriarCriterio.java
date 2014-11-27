@@ -53,7 +53,7 @@ public class CriarCriterio extends Activity {
 			@Override
 			public void onClick(View v) {
 				String descricao = edDesc.getText().toString();
-				int peso = Integer.parseInt(edPeso.getText().toString());
+				Double peso = Double.parseDouble(edPeso.getText().toString());
 				Criterio c = new Criterio(0, peso, descricao, id);
 				criterioDAO.inserirCriterio(c);
 				atualizaAdapter();
@@ -94,6 +94,4 @@ public class CriarCriterio extends Activity {
 			}
 		}
 	}
-	
-
 }

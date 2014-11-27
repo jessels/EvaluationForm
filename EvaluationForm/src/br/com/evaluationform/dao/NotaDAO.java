@@ -21,6 +21,7 @@ public class NotaDAO {
 	private static final String	ATUALIZAR = "atualizarNota";
 	private static final String BUSCAR_TODOS = "buscarTodosNota";
 	private static final String BUSCAR_POR_ID = "buscarNotaPorId";
+	private static final String BUSCAR_NOTA1 = "notaFinal1";
 	
 public boolean inserirNota(Nota nota){
 		
@@ -161,5 +162,28 @@ public boolean inserirNota(Nota nota){
 		
 		}
 		return not;
+	}
+	public Double notaFinal1(String nome_avaliacao){
+		Nota nota1 = null;
+		SoapObject buscarNota1 = new SoapObject(NAMESPACE, BUSCAR_NOTA1);
+		buscarNota1.addProperty("nome_avaliacao", nome_avaliacao);
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		envelope.setOutputSoapObject(buscarNota1);
+		envelope.implicitTypes = true;
+		
+		HttpTransportSE http = new HttpTransportSE(URL);
+		try {
+			http.call("urn" + BUSCAR_NOTA1, envelope);
+			SoapObject resposta = (SoapObject) envelope.getResponse();
+				nota1 = new Nota();
+				nota1.setNota_aluno1(Double.parseDouble(resposta.getProperty("nome_avaliacao").toString()));
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		
+		}
+		return nota1.getNota_aluno1();
+		
 	}
 }

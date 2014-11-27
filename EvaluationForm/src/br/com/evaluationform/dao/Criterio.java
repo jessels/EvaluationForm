@@ -69,9 +69,7 @@ public class Criterio implements Serializable{
 //	}
 	@Override
 	public String toString() {
-		return "Criterio [id_criterio=" + id_criterio + ", peso=" + peso
-				+ ", descricao=" + descricao + ", id_tabela_av=" + id_tabela_av
-				+ ", nota=" + nota + "]";
+		return descricao;
 	}
 	
 	

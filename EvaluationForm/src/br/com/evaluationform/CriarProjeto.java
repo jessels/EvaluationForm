@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import br.com.evaluationform.dao.Evento;
 import br.com.evaluationform.dao.EventoDAO;
 import br.com.evaluationform.dao.Projeto;
@@ -54,7 +55,9 @@ public class CriarProjeto extends Activity {
 				
 				
 				if(verificaPreenchimento()){
-					projetoDAO.inserirProjeto(new Projeto(0, nomePj, eventoSelecionado.getId_evento()));
+					if(projetoDAO.inserirProjeto(new Projeto(0, nomePj, eventoSelecionado.getId_evento()))){
+						Toast.makeText(getApplicationContext(), "Projeto Cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+					}
 					
 				}
 			}

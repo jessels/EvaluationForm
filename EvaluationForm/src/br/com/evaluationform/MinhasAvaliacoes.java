@@ -59,6 +59,7 @@ public class MinhasAvaliacoes extends Activity{
 							Intent irTelaAvaliacao = new Intent(getApplicationContext(), TelaNota.class);
 							irTelaAvaliacao.putExtra("id_avaliacao", avaliacaoSelecionada.getId_avaliacao());
 							irTelaAvaliacao.putExtra("id_tabela_av", avaliacaoSelecionada.getId_tabela_av());
+							irTelaAvaliacao.putExtra("nome_av", avaliacaoSelecionada.getNome_av());
 							startActivity(irTelaAvaliacao);
 							finish();
 							dialog.cancel();

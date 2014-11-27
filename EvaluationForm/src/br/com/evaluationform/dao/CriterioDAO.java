@@ -27,7 +27,7 @@ public class CriterioDAO {
 		SoapObject inserirCriterio = new SoapObject(NAMESPACE, INSERIR);
 		SoapObject crit = new SoapObject(NAMESPACE, "criterio");
 		
-		crit.addProperty("id", criterio.getId_criterio());
+		crit.addProperty("id_criterio", criterio.getId_criterio());
 		crit.addProperty("peso", criterio.getPeso());
 		crit.addProperty("descricao", criterio.getDescricao());
 		crit.addProperty("id_tabela_av", criterio.getId_tabela_av());
@@ -39,7 +39,7 @@ public class CriterioDAO {
 		
 		HttpTransportSE http = new HttpTransportSE(URL);
 		try {
-			http.call("urn" + INSERIR, envelope);
+			http.call("urn:" + INSERIR, envelope);
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			return Boolean.parseBoolean(resposta.toString());
 	

@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import br.com.evaluationform.adapter.AdapterCriterio;
 import br.com.evaluationform.dao.Criterio;
 import br.com.evaluationform.dao.CriterioDAO;
@@ -27,6 +29,7 @@ public class TelaNota extends Activity{
 	private NotaDAO notaDAO;
 	private Usuario usuario;
 	private AdapterCriterio adapCriterio;
+	private TextView tx_nota;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +47,12 @@ public class TelaNota extends Activity{
 		Intent it = getIntent();
 		final Integer id_avaliacao = getIntent().getIntExtra("id_avaliacao", 0);
 		final Integer id_tabela_av = getIntent().getIntExtra("id_tabela_av", 0);
+		final String nome_av = getIntent().getStringExtra("nome_av");
 		Log.i("TESTE", "id da tabela " + id_tabela_av);
 		Log.i("TESTE", "id da avaliacao " + id_avaliacao);
+		
+		tx_nota.setText(nome_av);
+	
 		List<Criterio> crit = criterioDAO.buscarCriterioPorTab(id_tabela_av);
 		adapCriterio = new AdapterCriterio(this, crit);
 		
@@ -60,12 +67,11 @@ public class TelaNota extends Activity{
 				
 				for (Criterio criterio : criterios) {
 					Nota nota = criterio.getNota();
-					
 					nota.setId_avaliacao(id_avaliacao);
 					nota.setId_user(usuario.getId());
-					notaDAO.inserirNota(nota);
-					
-					Log.i("criterinho da amizad", criterio.toString());
+					if(notaDAO.inserirNota(nota)){
+						Toast.makeText(getApplicationContext(), "Avaliação feita com sucesso!", Toast.LENGTH_LONG).show();
+					}
 				}
 			}
 		});
@@ -80,8 +86,8 @@ public class TelaNota extends Activity{
 	private void inicializaComponentes(){
 		this.listaCriterio = (ListView) findViewById(R.id.list_nota_Criterio);
 		this.btAvalia = (Button) findViewById(R.id.bt_nota_avaliar);
+		this.tx_nota = (TextView) findViewById(R.id.nota_tela_exibixcao);
 		this.criterioDAO = new CriterioDAO();
 		this.notaDAO = new NotaDAO();
-		
 	}
 }
