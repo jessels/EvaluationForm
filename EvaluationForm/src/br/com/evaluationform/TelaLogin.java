@@ -86,20 +86,17 @@ public class TelaLogin extends Activity {
 					}
 				}
 
-				});
+			});
+		}
+		btRegistro.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent irTelaCadastro = new Intent(getApplicationContext(),	TelaCadastro.class);
+				startActivity(irTelaCadastro);
 			}
-		
-//		btRegistro.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent irTelaCadastro = new Intent(getApplicationContext(),	TelaCadastro.class);
-//				startActivity(irTelaCadastro);
-//				finish();
-//
-//			}
-//
-//		});
+
+		});
 
 	}
 	

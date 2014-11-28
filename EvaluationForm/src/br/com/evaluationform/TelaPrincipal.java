@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,11 +24,16 @@ public class TelaPrincipal extends Activity {
 	Sessao sessao;
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		return super.onCreateOptionsMenu(menu);
+		
+	}
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tela_principal);
 		this.inicializaComponentes();
-		
+				
 		recuperaPreferencia();
 		
 		menuEvento.setOnClickListener(new OnClickListener() {

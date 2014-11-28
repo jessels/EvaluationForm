@@ -9,11 +9,12 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import android.util.Log;
 import br.com.evaluationform.adapter.MarshalDouble;
 
 public class NotaDAO {
 	
-	private static final String URL = "http://192.168.241.140:8080/EvaluationWSv2/services/NotaDAO?wsdl";
+	private static final String URL = "http://192.168.241.19:8080/EvaluationWSv2/services/NotaDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirNota";
@@ -22,6 +23,7 @@ public class NotaDAO {
 	private static final String BUSCAR_TODOS = "buscarTodosNota";
 	private static final String BUSCAR_POR_ID = "buscarNotaPorId";
 	private static final String BUSCAR_NOTA1 = "notaFinal1";
+	private static final String BUSCAR_NOTA2 = "notaFinal2";
 	
 public boolean inserirNota(Nota nota){
 		
@@ -163,8 +165,9 @@ public boolean inserirNota(Nota nota){
 		}
 		return not;
 	}
-	public Double notaFinal1(String nome_avaliacao){
-		Nota nota1 = null;
+	
+	public double notaFinal1(String nome_avaliacao){
+		double nota1 = 0;
 		SoapObject buscarNota1 = new SoapObject(NAMESPACE, BUSCAR_NOTA1);
 		buscarNota1.addProperty("nome_avaliacao", nome_avaliacao);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -173,17 +176,33 @@ public boolean inserirNota(Nota nota){
 		
 		HttpTransportSE http = new HttpTransportSE(URL);
 		try {
-			http.call("urn" + BUSCAR_NOTA1, envelope);
-			SoapObject resposta = (SoapObject) envelope.getResponse();
-				nota1 = new Nota();
-				nota1.setNota_aluno1(Double.parseDouble(resposta.getProperty("nome_avaliacao").toString()));
-		
+			http.call("urn:" + BUSCAR_NOTA1, envelope);
+			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+			Log.d("Resposta nota", resposta.toString());
+			nota1 = Double.valueOf(resposta.toString());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
-		
 		}
-		return nota1.getNota_aluno1();
+		return nota1;
+	}
+	
+	public double notaFinal2(String nome_avaliacao){
+		double nota2 = 0;
+		SoapObject buscarNota1 = new SoapObject(NAMESPACE, BUSCAR_NOTA2);
+		buscarNota1.addProperty("nome_avaliacao", nome_avaliacao);
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		envelope.setOutputSoapObject(buscarNota1);
+		envelope.implicitTypes = true;
 		
+		HttpTransportSE http = new HttpTransportSE(URL);
+		try {
+			http.call("urn:" + BUSCAR_NOTA2, envelope);
+			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+				nota2 = Double.valueOf(resposta.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return nota2;
 	}
 }

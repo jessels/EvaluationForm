@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.evaluationform.dao.Avaliacao;
@@ -40,6 +42,42 @@ public class MinhasAvaliacoes extends Activity{
 		}
 		recuperaPreferencia();
 		this.inicializaComponentes();
+		
+		lista_avaliacao.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				avaliacaoSelecionada = (Avaliacao) lista_avaliacao.getItemAtPosition(position);
+				AlertDialog.Builder dialogo = new AlertDialog.Builder(MinhasAvaliacoes.this);
+				dialogo.setTitle("Avaliação");
+				dialogo.setMessage("Deseja ver as notas");
+				dialogo.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent irTelaNota = new Intent(getApplicationContext(), NotaFinal.class);
+						irTelaNota.putExtra("nome_av", avaliacaoSelecionada.getNome_av());
+						startActivity(irTelaNota);
+						finish();
+					}
+				});
+				dialogo.setNeutralButton("Não", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+					dialog.cancel();	
+						
+					}
+				});
+				dialogo.create();
+				dialogo.show();
+
+				return false;
+			}
+		});
 		
 		lista_avaliacao.setOnItemClickListener(new OnItemClickListener() {
 
