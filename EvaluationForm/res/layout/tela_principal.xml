@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:id="@+id/RelativeLayout1"
+    
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="20dp"
@@ -68,9 +69,11 @@
         android:layout_marginTop="20dp"
         android:text="Minhas Avaliações" />
 
-   
-
-        
-     
+    <Button
+        android:id="@+id/bt_desloga"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 </RelativeLayout>

@@ -14,7 +14,7 @@ import br.com.evaluationform.adapter.MarshalDouble;
 
 public class NotaDAO {
 	
-	private static final String URL = "http://192.168.241.19:8080/EvaluationWSv2/services/NotaDAO?wsdl";
+	private static final String URL = "http://192.168.1.5:8080/EvaluationWSv2/services/NotaDAO?wsdl";
 	private static final String NAMESPACE = "http://evaluationv2.com.br";
 	
 	private static final String INSERIR = "inserirNota";

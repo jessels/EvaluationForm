@@ -1,11 +1,13 @@
 package br.com.evaluationform;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,15 +26,13 @@ public class TelaPrincipal extends Activity {
 	Sessao sessao;
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return super.onCreateOptionsMenu(menu);
-		
-	}
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tela_principal);
 		this.inicializaComponentes();
+		
+		ActionBar ab = getActionBar();
+		ab.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
 				
 		recuperaPreferencia();
 		
@@ -79,16 +79,16 @@ public class TelaPrincipal extends Activity {
 		
 //		this.tvUsuarioLogado.setText(this.tvUsuarioLogado.getText()+this.usuario.getLogin());
 //		this.tvSenhaLogado.setText(this.tvSenhaLogado.getText()+this.usuario.getSenha());
-//		this.btDeslogar.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View arg0) {
-//				limparSharedPreferences();
-//				Intent intentAutenticacao = new Intent(getApplicationContext(),TelaLogin.class);
-//				startActivity(intentAutenticacao);
-//				finish();
-//			}
-//		});
+		this.btDeslogar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				limparSharedPreferences();
+				Intent intentAutenticacao = new Intent(getApplicationContext(),TelaLogin.class);
+				startActivity(intentAutenticacao);
+				finish();
+			}
+		});
 		
 	}
 	
@@ -112,7 +112,29 @@ public class TelaPrincipal extends Activity {
 		this.menuProjeto = (Button) findViewById(R.id.menu_projeto);
 		this.menuTabela = (Button) findViewById(R.id.menu_tabela);
 		this.menuAvaliacao = (Button) findViewById(R.id.menu_avaliacao);
+		this.btDeslogar = (Button) findViewById(R.id.bt_desloga);
 		this.config = (Button) findViewById(R.id.menu_config);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuItem item1 = menu.add(0, 0, 0, "Logoff");
+		item1.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int panel, MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.bt_desloga:
+			limparSharedPreferences();		
+			break;
+
+		default:
+			break;
+		}
+		
+		return(true);
 	}
 	
 }
